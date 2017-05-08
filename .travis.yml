@@ -1,7 +1,10 @@
 language: java
 jdk:
 - oraclejdk8
-
+env:
+  - TEST_DIR=citizensLoader3a
+  - TEST_DIR=parti3a
+script: cd $TEST_DIR && mvn test
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 before_script:
