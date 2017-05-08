@@ -13,5 +13,4 @@ public interface CommentRepository extends JpaRepository<Comment, Long>{
 	
 	List<Comment> findBySuggestionOrderByCreationDateDesc(Suggestion suggestion);
 	List<Comment> findBySuggestionOrderByCreationDateAsc(Suggestion suggestion);
-
 }

@@ -7,5 +7,5 @@ import es.uniovi.asw.model.*;
 
 @Repository
 public interface SuggestionRepository extends JpaRepository<Suggestion, Long> {	
-
+	Suggestion findByContents(String contents);
 }
