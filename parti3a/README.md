@@ -7,7 +7,7 @@
 
 [![Join the chat at https://gitter.im/Arquisoft/participants0](https://badges.gitter.im/Arquisoft/participants0.svg)](https://gitter.im/Arquisoft/participants0?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Proyecto conjunto del sistema de participación ciudadana
+Proyecto conjunto del sistema de participaciÃ³n ciudadana
 
 # Authors
 
