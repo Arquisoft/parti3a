@@ -1,5 +1,7 @@
 package es.uniovi.asw.business.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,16 @@ public class CitizenServiceImpl implements CitizenService{
 	@Override
 	public Citizen findCitizen(Long citizenId) {
 		return citizenRepository.findOne(citizenId);
+	}
+
+	@Override
+	public Citizen findByDni(String dni) {
+		return citizenRepository.findByDni(dni);
+	}
+
+	@Override
+	public List<Citizen> findAllCitizens() {
+		return citizenRepository.findAll();
 	}
 	
 }
