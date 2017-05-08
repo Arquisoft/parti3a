@@ -8,13 +8,14 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import es.uniovi.asw.business.SuggestionVoteService;
 import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.Suggestion;
 import es.uniovi.asw.model.SuggestionVote;
+import es.uniovi.asw.model.User;
 import es.uniovi.asw.model.types.VoteStatus;
 import es.uniovi.asw.persistence.CommentRepository;
 import es.uniovi.asw.persistence.SuggestionRepository;
-import es.uniovi.asw.persistence.SuggestionVoteRepository;
 
 
 @Service
@@ -31,8 +32,8 @@ public class ScheduleMockProducer {
 	private CommentRepository comentarioRepository;
 
 	@Autowired
-	private SuggestionVoteRepository voteRepository;
-
+	private SuggestionVoteService voteService;
+	
 	@Autowired
 	private JpaContext jpaContext;
 	
@@ -63,20 +64,13 @@ public class ScheduleMockProducer {
 	}
 	
 	private Suggestion saveSugerencia(Suggestion sugerencia) {
-		sugerencia = jpaContext.getEntityManagerByManagedType(sugerencia.getClass())
-								.merge(sugerencia);
-		SuggestionVote suggestionVote;
-		
+		VoteStatus status;
 		if (Math.round(Math.random()) == 1)
-			suggestionVote = new SuggestionVote(sugerencia, sugerencia.getUser(), 
-					VoteStatus.IN_FAVOUR);
+			status = VoteStatus.IN_FAVOUR;
 		else
-			suggestionVote = new SuggestionVote(sugerencia, sugerencia.getUser(),
-					VoteStatus.AGAINST);
+			status = VoteStatus.AGAINST;
 
-		voteRepository.save(suggestionVote);
-		sugerencia.getVotes().add(suggestionVote);
-		
-		return sugerencia;
+		voteService.addSuggestionVote(sugerencia, sugerencia.getUser(), status);
+		return sugerenciaRepository.findByContents(sugerencia.getContents());
 	}
 }

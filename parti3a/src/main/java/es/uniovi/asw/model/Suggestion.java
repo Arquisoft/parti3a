@@ -38,7 +38,7 @@ public class Suggestion implements Serializable {
 	@JsonBackReference(value = "user-suggestions")
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonBackReference(value = "category-suggestions")
 	private Category category;	
 	
