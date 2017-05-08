@@ -1,9 +1,5 @@
 package es.uniovi.asw.participants.information.rest;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.Period;
-
 import es.uniovi.asw.model.Citizen;
 
 
@@ -28,7 +24,7 @@ public class GetParticipantInfoResponse {
 		this.id = ciudadano.getId();
 		this.firstName = ciudadano.getName();
 		this.lastName = ciudadano.getSurname();
-		this.age = getAge((Date) ciudadano.getBirthday());
+		this.age = ciudadano.getAge();
 		this.email = ciudadano.getEmail();
 	}
 	
@@ -77,16 +73,6 @@ public class GetParticipantInfoResponse {
 	}
 	
 	//Metodos
-	
-	public int getAge(Date birth) {   	
-
-		LocalDate birthday = birth.toLocalDate();
-		LocalDate now = LocalDate.now();
-
-		int age = Period.between(birthday, now).getYears();
-
-		return age;
-	}
 
 	@Override
 	public int hashCode() {
