@@ -1,5 +1,7 @@
 package es.uniovi.asw.business;
 
+import java.util.List;
+
 import es.uniovi.asw.model.Citizen;
 
 public interface CitizenService {
@@ -9,5 +11,9 @@ public interface CitizenService {
 	public void deleteCitizen (Citizen citizen);
 	public void updateCitizen (Citizen citizen);
 	public Citizen findCitizen (Long citizenId);
+	
+	//Otros 
+	public Citizen findByDni (String dni);
+	public List<Citizen> findAllCitizens ();
 	
 }

@@ -1,13 +1,13 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2f5e9b234d9b4cbd8669629c299990ad)](https://www.codacy.com/app/jelabra/parti3a?utm_source=github.com&utm_medium=referral&utm_content=Arquisoft/parti3a&utm_campaign=badger)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/53ec97dfbe3449c0b0031504862909bb)](https://www.codacy.com/app/UO237351/parti3a?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Arquisoft/parti3a&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/Arquisoft/parti3a.svg?branch=master)](https://travis-ci.org/Arquisoft/parti3a)
 [![codecov](https://codecov.io/gh/Arquisoft/parti3a/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/parti3a)
 
 
 # parti3a
 
-[![Join the chat at https://gitter.im/Arquisoft/participants0](https://badges.gitter.im/Arquisoft/participants0.svg)](https://gitter.im/Arquisoft/participants0?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/Arquisoft/parti3a](https://badges.gitter.im/Arquisoft/parti3a.svg)](https://gitter.im/Arquisoft/parti3a?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Proyecto conjunto del sistema de participaciÃ³n ciudadana
+Proyecto conjunto del sistema de participación ciudadana
 
 # Authors
 

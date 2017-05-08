@@ -8,6 +8,7 @@ import es.uniovi.asw.model.Citizen;
 
 @Repository
 public interface CitizenRepository extends JpaRepository<Citizen, Long> {
+	
 	/**
 	 * Busca un usuario dados su login y contraseña
 	 * 
@@ -17,4 +18,7 @@ public interface CitizenRepository extends JpaRepository<Citizen, Long> {
 	*/
 	 @Query("select c from Citizen c where c.email = ?1 and c.user.password = ?2")
 	 Citizen findByEmailAndPassword(String email, String password);
+	 
+	 Citizen findByDni (String dni);
+	 
 }
