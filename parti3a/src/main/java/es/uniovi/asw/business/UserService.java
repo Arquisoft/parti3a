@@ -13,4 +13,5 @@ public interface UserService {
 	//Otros
 	public User findByUsernameAndPassword(String username, String password);
 	
+	public int findNumberOfAdmins();
 }
