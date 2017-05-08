@@ -1,4 +1,4 @@
-package es.uniovi.asw.participants.view;
+package es.uniovi.asw.participants.information.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,12 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.uniovi.asw.business.CitizenService;
 import es.uniovi.asw.model.Citizen;
-import es.uniovi.asw.participants.information.citizen.CitizenInformationRequest;
-import es.uniovi.asw.participants.information.citizen.CitizenInformationResponse;
-import es.uniovi.asw.participants.information.errors.CitizenNotFoundError;
+import es.uniovi.asw.participants.information.errors.ParticipantNotFound;
 import es.uniovi.asw.participants.information.errors.ErrorInterface;
 import es.uniovi.asw.util.Encrypter;
-
 
 /**
  * Representa la información que irá en el JSON cuando se 
@@ -28,8 +25,8 @@ import es.uniovi.asw.util.Encrypter;
  * 
  */
 @RestController
-public class CitizenInformationController {
-	
+public class GetParticipantInfoController implements GetParticipantInfo {
+
 	@Autowired 
 	CitizenService citizenService;
 
@@ -43,25 +40,26 @@ public class CitizenInformationController {
 	@RequestMapping(method = RequestMethod.POST, value = "/user", 
 			produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},	
 			consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})	
-	public ResponseEntity<CitizenInformationResponse> retrieveCitizenInformation(@RequestBody CitizenInformationRequest form) {	
+
+	public ResponseEntity<GetParticipantInfoResponse> getParticipantInfo(@RequestBody GetParticipantInfoRequest form) {	
+
 		String email = form.getLogin();
 		String password = form.getPassword();		
 		String encryptedPassword = Encrypter.getInstance().makeSHA1Hash(password);
 
-		Citizen ciudadano = citizenService.findByEmailAndPassword(email, encryptedPassword);		
-		
-		if (ciudadano != null) {
-			
-			CitizenInformationResponse citizen = new CitizenInformationResponse(ciudadano);
+		Citizen ciudadano = citizenService.getParticipant(email, encryptedPassword);		
 
-		return ResponseEntity.ok(citizen);
+		if (ciudadano != null) 
+		{					
+			GetParticipantInfoResponse citizen = new GetParticipantInfoResponse(ciudadano);
+			return ResponseEntity.ok(citizen);
 		}
-	
-		else throw new CitizenNotFoundError();		
+		else throw new ParticipantNotFound();		
 	}	
-	
+
 	@ExceptionHandler(ErrorInterface.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
+	
 	public String handleErrorResponses(ErrorInterface error) {
 		return error.getJSONError();
 	}

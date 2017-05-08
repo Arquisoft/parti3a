@@ -1,4 +1,4 @@
-package es.uniovi.asw.participants.view;
+package es.uniovi.asw.participants.information.html;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import es.uniovi.asw.model.Citizen;
-import es.uniovi.asw.participants.information.errors.CitizenNotFoundError;
+import es.uniovi.asw.participants.information.errors.ParticipantNotFound;
 import es.uniovi.asw.participants.information.errors.ErrorInterface;
 import es.uniovi.asw.persistence.CitizenRepository;
 import es.uniovi.asw.util.Encrypter;
@@ -25,7 +25,7 @@ import es.uniovi.asw.util.Encrypter;
  * 
  */
 @Controller
-public class HTMLController {
+public class GetParticipantInfoControllerHTML {
 
 	@Autowired
 	private CitizenRepository repository;
@@ -62,7 +62,7 @@ public class HTMLController {
 			return "datos";
 		}
 		else 
-			throw new CitizenNotFoundError();
+			throw new ParticipantNotFound();
 	}
 
 	@ExceptionHandler(ErrorInterface.class)

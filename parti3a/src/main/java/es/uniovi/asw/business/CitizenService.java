@@ -16,5 +16,5 @@ public interface CitizenService {
 	public Citizen findByDni (String dni);
 	public List<Citizen> findAllCitizens ();
 	
-	public Citizen findByEmailAndPassword(String email, String password);
+	public Citizen getParticipant(String email, String password);
 }

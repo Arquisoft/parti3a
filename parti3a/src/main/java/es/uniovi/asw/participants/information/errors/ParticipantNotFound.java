@@ -1,6 +1,6 @@
 package es.uniovi.asw.participants.information.errors;
 
-public class CitizenNotFoundError extends ErrorInterface {
+public class ParticipantNotFound extends ErrorInterface {
 
 	private static final long serialVersionUID = 1L;
 

@@ -1,4 +1,4 @@
-package es.uniovi.asw.participants.information.citizen;
+package es.uniovi.asw.participants.information.rest;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -14,17 +14,17 @@ import es.uniovi.asw.model.Citizen;
  * @author UO247242
  * 
  */
-public class CitizenInformationResponse {
+public class GetParticipantInfoResponse {
 	
 	private Long id;	
 	
 	private String firstName;
 	private String lastName;
-	private int  age;
+	private int age;
 	private String email;
 
-	public CitizenInformationResponse(Citizen ciudadano) {
-		
+	public GetParticipantInfoResponse(Citizen ciudadano) 
+	{		
 		this.id = ciudadano.getId();
 		this.firstName = ciudadano.getName();
 		this.lastName = ciudadano.getSurname();
@@ -32,8 +32,10 @@ public class CitizenInformationResponse {
 		this.email = ciudadano.getEmail();
 	}
 	
-	public CitizenInformationResponse() { }
+	public GetParticipantInfoResponse() { }
 
+	//Getters y Setters
+	
 	public Long getId() {
 		return id;
 	}
@@ -74,6 +76,8 @@ public class CitizenInformationResponse {
 		this.email = email;
 	}
 	
+	//Metodos
+	
 	public int getAge(Date birth) {   	
 
 		LocalDate birthday = birth.toLocalDate();
@@ -100,7 +104,7 @@ public class CitizenInformationResponse {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CitizenInformationResponse other = (CitizenInformationResponse) obj;
+		GetParticipantInfoResponse other = (GetParticipantInfoResponse) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

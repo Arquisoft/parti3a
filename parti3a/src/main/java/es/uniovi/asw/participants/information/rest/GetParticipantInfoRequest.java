@@ -1,4 +1,4 @@
-package es.uniovi.asw.participants.information.citizen;
+package es.uniovi.asw.participants.information.rest;
 
 /**
  * Representa la información que irá en el JSON cuando se 
@@ -7,19 +7,21 @@ package es.uniovi.asw.participants.information.citizen;
  * @author UO247242
  *  
  */
-public class CitizenInformationRequest {
+public class GetParticipantInfoRequest {
 	
 	private String login;
 	private String password;
 	
-	public CitizenInformationRequest(String login, String password) {	
+	public GetParticipantInfoRequest(String login, String password) {	
 
 		this.login = login;
 		this.password = password;
 	}
 	
-	public CitizenInformationRequest() {}
+	public GetParticipantInfoRequest() {}
 
+	//Getters y Setters
+	
 	public String getLogin() {
 		return login;
 	}
