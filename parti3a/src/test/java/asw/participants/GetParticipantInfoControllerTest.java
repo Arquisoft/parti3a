@@ -5,12 +5,11 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.TestRestTemplate;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -23,7 +22,7 @@ import es.uniovi.asw.participants.information.rest.GetParticipantInfoResponse;
 public class GetParticipantInfoControllerTest {
 
 	// Test RestTemplate to invoke the APIs.
-	private RestTemplate restTemplate = new TestRestTemplate();
+	private TestRestTemplate restTemplate = new TestRestTemplate();
 
 	@Test
 	public void testRESTSuccesful() throws JsonProcessingException {
