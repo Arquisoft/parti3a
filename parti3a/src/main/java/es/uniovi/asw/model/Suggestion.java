@@ -70,7 +70,7 @@ public class Suggestion implements Serializable {
 	public Suggestion(String contents, Category category, User user) {		
 		this.contents = contents;
 		this.creationDate = new Date();
-		this.user = user;
+		Association.AsignarSugerencia.link(user, this);
 		this.category = category;	
 		this.status = SuggestionStatus.OPEN;
 	}
@@ -191,6 +191,16 @@ public class Suggestion implements Serializable {
 	
 	public void setNumComments(int numComments) {
 		this.numComments = numComments;
+	}
+	
+	public void addNegativeVote() {
+		int votes = getNegativeVotes();
+		setNegativeVotes(votes++);
+	}
+	
+	public void addPositiveVote() {
+		int votes = getPositiveVotes();
+		setPositiveVotes(votes++);
 	}
 
 	@Override

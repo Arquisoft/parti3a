@@ -57,7 +57,7 @@ public class User implements Serializable {
 
 	public User(String username, Citizen citizen) {
 		this.username = username;
-		this.citizen = citizen;
+		Association.Asignar.link(this, citizen);
 	}
 
 	public User(String username, String password, Citizen citizen) {

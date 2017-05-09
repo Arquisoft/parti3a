@@ -24,8 +24,8 @@ public class Association {
 	public static class AsignarSugerencia {
 		
 		public static void link(User user, Suggestion suggestion) {
-			user._getSuggestions().add(suggestion);
 			suggestion._setUser(user);
+			user._getSuggestions().add(suggestion);
 		}
 		
 		public static void unlink(User user, Suggestion suggestion) {
