@@ -38,7 +38,7 @@ public class GetParticipantInfoController {
 
 		// Invoking the API
 		ResponseEntity<GetParticipantInfoResponse> restResponse = restTemplate
-				.postForEntity("http://localhost:8080/user", request, 
+				.postForEntity("http://localhost:8090/user", request, 
 						GetParticipantInfoResponse.class);
 
 		assertNotNull(restResponse);
@@ -52,7 +52,7 @@ public class GetParticipantInfoController {
 		// Testing another Citizen
 		request = new GetParticipantInfoRequest("agolmay@goomail.com", "1234");
 
-		restResponse = restTemplate.postForEntity("http://localhost:8080/user", 
+		restResponse = restTemplate.postForEntity("http://localhost:8090/user", 
 				request, GetParticipantInfoResponse.class);
 
 		assertNotNull(restResponse);
@@ -65,7 +65,7 @@ public class GetParticipantInfoController {
 
 		// Testing another Citizen
 		request = new GetParticipantInfoRequest("isalopez@yourmail.com", "1234");
-		restResponse = restTemplate.postForEntity("http://localhost:8080/user",
+		restResponse = restTemplate.postForEntity("http://localhost:8090/user",
 				request, GetParticipantInfoResponse.class);
 
 		assertNotNull(restResponse);
@@ -88,7 +88,7 @@ public class GetParticipantInfoController {
 
 		// Invoking the API
 		ResponseEntity<GetParticipantInfoResponse> restResponse = restTemplate
-				.postForEntity("http://localhost:8080/user", request, 
+				.postForEntity("http://localhost:8090/user", request, 
 						GetParticipantInfoResponse.class);
 
 		assertNotNull(restResponse);
@@ -97,7 +97,7 @@ public class GetParticipantInfoController {
 		// Testing wrong email
 		request = new GetParticipantInfoRequest("agolmay@goomail.com", "1234");
 
-		restResponse = restTemplate.postForEntity("http://localhost:8080/user",
+		restResponse = restTemplate.postForEntity("http://localhost:8090/user",
 				request, GetParticipantInfoResponse.class);
 
 		assertNotNull(restResponse);

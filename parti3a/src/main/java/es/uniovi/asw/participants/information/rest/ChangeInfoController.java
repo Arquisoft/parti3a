@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.uniovi.asw.business.CitizenService;
 import es.uniovi.asw.participants.information.errors.BadRequestError;
-import es.uniovi.asw.participants.information.errors.ErrorInterface;
 import es.uniovi.asw.participants.information.utils.Check;
 import es.uniovi.asw.util.Encrypter;
 
@@ -81,13 +80,7 @@ public class ChangeInfoController implements ChangeInfo {
 		
 		return ResponseEntity.ok(new ChangePasswordResponse(email, "Contraseña cambiada correctamente"));
 	}
-	
-	@ExceptionHandler(ErrorInterface.class)
-	@ResponseStatus(value = HttpStatus.NOT_FOUND)
-	public String handleErrorResponses(ErrorInterface error) {
-		return error.getJSONError();
-	}
-	
+
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(BadRequestError.class)
 	public String handleBadRequest(BadRequestError error) {

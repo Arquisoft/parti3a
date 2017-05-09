@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 import es.uniovi.asw.business.CitizenService;
 import es.uniovi.asw.model.Citizen;
@@ -78,12 +77,11 @@ public class ChangeInfoControllerHTML {
 		return "redirect:/datos";
 	}
 	
-	@RequestMapping
-	@ExceptionHandler(BadRequestError.class)
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-	public RedirectView handleErrorResponseNotFound(ErrorInterface excep, RedirectAttributes attrs) {
+	@ExceptionHandler(BadRequestError.class)
+	public String handleErrorResponseNotFound(ErrorInterface excep, RedirectAttributes attrs) {
 		attrs.addFlashAttribute("error", excep.getStringError());
 		attrs.addFlashAttribute("errorPresent", true);
-		return new RedirectView("redirect:/datos");
+		return "redirect:/datos";
 	}
 }
