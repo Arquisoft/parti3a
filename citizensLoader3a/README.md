@@ -1,4 +1,4 @@
-# citizensLoader0
+# citizensLoader3a
 
 [![Join the chat at https://gitter.im/Arquisoft/citizensLoader3a](https://badges.gitter.im/Arquisoft/citizensLoader3a.svg)](https://gitter.im/Arquisoft/citizensLoader3a?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/Arquisoft/citizensLoader3a.svg?branch=master)](https://travis-ci.org/Arquisoft/citizensLoader3a)
@@ -13,5 +13,3 @@ Skeleton of Citizens Loader module
 * Jose Emilio Labra Gayo (@labra)
 * Alberto Cortina Eduarte (@AlbertoCortina)
 * Pelayo Álvarez García (@PelayoAlvarez)
-* Víctor Manuel Chávez García (@MaVic96)
-* Roberto Álvarez Menéndez (@robalvamenen)
