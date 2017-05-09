@@ -1,6 +1,8 @@
 package es.uniovi.asw.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -43,7 +45,7 @@ public class Citizen implements Serializable {
 		this.residence = residence;
 		this.nationality = nationality;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -109,6 +111,17 @@ public class Citizen implements Serializable {
 	}
 
 	
+	//Metodos
+	
+	public int getAge() {   	
+
+		LocalDate birthday = ((java.sql.Date) this.birthday).toLocalDate();
+		LocalDate now = LocalDate.now();
+
+		int age = Period.between(birthday, now).getYears();
+
+		return age;
+	}
 
 	@Override
 	public String toString() {
