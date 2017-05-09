@@ -34,36 +34,44 @@ public class GetParticipantInfoController {
 		// Building the Request body data
 		// Creating http entity object
 		GetParticipantInfoRequest request = 
-				new GetParticipantInfoRequest("pperez@prueba.com", "1234");
+				new GetParticipantInfoRequest("user1@me.com", "user1");
 
 		// Invoking the API
 		ResponseEntity<GetParticipantInfoResponse> restResponse = restTemplate
-				.postForEntity("http://localhost:8080/user", request, 
+				.postForEntity("http://localhost:8090/user", request, 
 						GetParticipantInfoResponse.class);
+		
+		//Making sure the response exists and HTTP code is 200
+		assertNotNull(restResponse);
+		assertEquals(HttpStatus.OK, restResponse.getStatusCode());
+		
+		//Getting the body of the response (which contains the user's info)		
+		GetParticipantInfoResponse response = restResponse.getBody();
+
+		assertEquals(new Long(1), response.getId());
+		assertEquals("Juan", response.getFirstName());
+		assertEquals("Rodríguez García", response.getLastName());
+		assertEquals(0, response.getAge());
+		assertEquals("user1@me.com", response.getEmail());
+
+		// Testing another Citizen (SAME STEPS AS BEFORE)
+		request = new GetParticipantInfoRequest("admin@me.com", "admin");
+
+		restResponse = restTemplate.postForEntity("http://localhost:8090/user", 
+				request, GetParticipantInfoResponse.class);		
 
 		assertNotNull(restResponse);
+		assertEquals(HttpStatus.OK, restResponse.getStatusCode());
+		
+		response = restResponse.getBody();
 
-		assertEquals(new Long(1), restResponse.getBody().getId());
-		assertEquals("Pedro", restResponse.getBody().getFirstName());
-		assertEquals("Perez Gonzalez", restResponse.getBody().getLastName());
-		assertEquals(49, restResponse.getBody().getAge());
-		assertEquals("pperez@prueba.com", restResponse.getBody().getEmail());
+		assertEquals(new Long(6), response.getId());
+		assertEquals("Pedro", response.getFirstName());
+		assertEquals("Hernández Pérez", response.getLastName());
+		assertEquals(0, response.getAge());
+		assertEquals("admin@me.com", response.getEmail());
 
-		// Testing another Citizen
-		request = new GetParticipantInfoRequest("agolmay@goomail.com", "1234");
-
-		restResponse = restTemplate.postForEntity("http://localhost:8080/user", 
-				request, GetParticipantInfoResponse.class);
-
-		assertNotNull(restResponse);
-
-		assertEquals(new Long(6), restResponse.getBody().getId());
-		assertEquals("Aniceto", restResponse.getBody().getFirstName());
-		assertEquals("Gol Mayordomo", restResponse.getBody().getLastName());
-		assertEquals(29, restResponse.getBody().getAge());
-		assertEquals("agolmay@goomail.com", restResponse.getBody().getEmail());
-
-		// Testing another Citizen
+		/*// Testing another Citizen
 		request = new GetParticipantInfoRequest("isalopez@yourmail.com", "1234");
 		restResponse = restTemplate.postForEntity("http://localhost:8080/user",
 				request, GetParticipantInfoResponse.class);
@@ -74,13 +82,13 @@ public class GetParticipantInfoController {
 		assertEquals("Isabel", restResponse.getBody().getFirstName());
 		assertEquals("Lopez Perez", restResponse.getBody().getLastName());
 		assertEquals(58, restResponse.getBody().getAge());
-		assertEquals("isalopez@yourmail.com", restResponse.getBody().getEmail());
+		assertEquals("isalopez@yourmail.com", restResponse.getBody().getEmail());*/
 	}
 
 	@Test
 	public void testRESTFailed() throws JsonProcessingException {
 
-		// Building the Request body data
+	/*	// Building the Request body data
 		// Creating http entity object
 		// Testing with wrong password
 		GetParticipantInfoRequest request = 
@@ -88,19 +96,20 @@ public class GetParticipantInfoController {
 
 		// Invoking the API
 		ResponseEntity<GetParticipantInfoResponse> restResponse = restTemplate
-				.postForEntity("http://localhost:8080/user", request, 
+				.postForEntity("http://localhost:8090/user", request, 
 						GetParticipantInfoResponse.class);
 
+		//Making sure the response exists and HTTP code is 200
 		assertNotNull(restResponse);
-		assertEquals(HttpStatus.OK, restResponse.getStatusCode());
+		assertEquals(HttpStatus.NOT_FOUND, restResponse.getStatusCode());
 
 		// Testing wrong email
 		request = new GetParticipantInfoRequest("agolmay@goomail.com", "1234");
 
-		restResponse = restTemplate.postForEntity("http://localhost:8080/user",
+		restResponse = restTemplate.postForEntity("http://localhost:8090/user",
 				request, GetParticipantInfoResponse.class);
 
 		assertNotNull(restResponse);
-		assertEquals(HttpStatus.OK, restResponse.getStatusCode());
+		assertEquals(HttpStatus.OK, restResponse.getStatusCode());*/
 	}
 }
