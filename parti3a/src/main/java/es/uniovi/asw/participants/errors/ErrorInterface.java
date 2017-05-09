@@ -1,4 +1,4 @@
-package es.uniovi.asw.participants.information.errors;
+package es.uniovi.asw.participants.errors;
 
 /**
  * Sólo sirve para poder recoger las excepciones que se puedan

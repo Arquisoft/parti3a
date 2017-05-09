@@ -1,4 +1,4 @@
-package es.uniovi.asw.participants.information.rest;
+package es.uniovi.asw.participants.rest.change_info;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.uniovi.asw.business.CitizenService;
-import es.uniovi.asw.participants.information.errors.BadRequestError;
-import es.uniovi.asw.participants.information.utils.Check;
+import es.uniovi.asw.model.Citizen;
+import es.uniovi.asw.participants.errors.ErrorInterface;
+import es.uniovi.asw.util.Check;
 import es.uniovi.asw.util.Encrypter;
 
 /**
@@ -38,7 +39,7 @@ public class ChangeInfoController implements ChangeInfo {
 			consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@Override
 	public ResponseEntity<ChangeEmailResponse> changeEmail(@RequestBody ChangeEmailRequest form) {
-		String email = form.getEmail();
+		String email = form.getLogin();
 		String password = form.getPassword();
 		String newEmail = form.getNewEmail();
 		
@@ -49,7 +50,9 @@ public class ChangeInfoController implements ChangeInfo {
 		Check.differentEmail(email, newEmail);
 		
 		//Si todo está bien, cambiamos su email y respondemos
-		citizenService.changeEmail(email, password, newEmail);
+		Citizen citizen = citizenService.findByEmailAndPassword(email, password);
+		citizen.setEmail(newEmail);
+		citizenService.updateInfo(citizen);
 		
 		return ResponseEntity.ok(new ChangeEmailResponse(email, "E-mail cambiado a " + newEmail));
 	}
@@ -76,14 +79,17 @@ public class ChangeInfoController implements ChangeInfo {
 		Check.differentPassword(password, newPassword);
 		
 		//Si todo es correcto, cambiamos la clave y retornamos la respuesta
-		citizenService.changePassword(email, password, newPassword);
-		
-		return ResponseEntity.ok(new ChangePasswordResponse(email, "Contraseña cambiada correctamente"));
+		Citizen citizen = citizenService.findByEmailAndPassword(email, password);
+		citizen.getUser().setPassword(newPassword);
+		citizenService.updateInfo(citizen);
+		 
+		return ResponseEntity.ok(new ChangePasswordResponse(email, 
+				"Contraseña cambiada correctamente"));
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler(BadRequestError.class)
-	public String handleBadRequest(BadRequestError error) {
+	@ExceptionHandler(ErrorInterface.class)
+	public String handleBadRequest(ErrorInterface error) {
 	    return error.getJSONError();
 	} 
 }

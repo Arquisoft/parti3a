@@ -1,19 +1,22 @@
-package es.uniovi.asw.participants.information.utils;
+package es.uniovi.asw.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import es.uniovi.asw.business.CitizenService;
 import es.uniovi.asw.model.Citizen;
-import es.uniovi.asw.participants.information.errors.EmailFormatException;
-import es.uniovi.asw.participants.information.errors.EmailUnchangedException;
-import es.uniovi.asw.participants.information.errors.ParticipantNotFound;
-import es.uniovi.asw.participants.information.errors.PasswordEmptyException;
-import es.uniovi.asw.participants.information.errors.PasswordUnchangedException;
+import es.uniovi.asw.participants.errors.EmailFormatException;
+import es.uniovi.asw.participants.errors.EmailUnchangedException;
+import es.uniovi.asw.participants.errors.ParticipantNotFound;
+import es.uniovi.asw.participants.errors.PasswordEmptyException;
+import es.uniovi.asw.participants.errors.PasswordUnchangedException;
 
 public class Check {
-	public static Citizen participantExists(String email, String password, CitizenService service) {
-		Citizen citizen = service.getParticipant(email, password);
+	
+	public static Citizen participantExists(String email, String password, 
+			CitizenService service) {
+		
+		Citizen citizen = service.findByEmailAndPassword(email, password);
 		
 		if (citizen == null)
 			throw new ParticipantNotFound();
@@ -23,7 +26,8 @@ public class Check {
 	
 	public static void validEmailFormat(String email) {
 		Pattern emailRegex = 
-			    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+			    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", 
+			    		Pattern.CASE_INSENSITIVE);
 		
 		Matcher matcher = emailRegex.matcher(email);
 		

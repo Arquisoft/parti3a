@@ -1,4 +1,4 @@
-package es.uniovi.asw.participants.information.rest;
+package es.uniovi.asw.participants.rest.get_info;
 
 /**
  * Representa la información que irá en el JSON cuando se 

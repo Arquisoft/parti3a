@@ -1,24 +1,24 @@
-package es.uniovi.asw.participants.information.rest;
+package es.uniovi.asw.participants.rest.change_info;
 
 /**
  * Representa la información que irá en el JSON cuando se 
- * envíen sus datos al usuario
+ * confirme el cambio de email al participante
  * 
- * @author UO247242
+ * @author UO246008
  * 
  */
-public class ChangePasswordResponse {
+public class ChangeEmailResponse {
 	
 	private String email;
 	private String message;
-	
-	public ChangePasswordResponse(String email, String message) 
+
+	public ChangeEmailResponse(String email, String message) 
 	{		
 		this.email = email;
 		this.message = message;
 	}
 	
-	public ChangePasswordResponse() { }
+	public ChangeEmailResponse() { }
 
 	public String getEmail() {
 		return email;
@@ -45,7 +45,7 @@ public class ChangePasswordResponse {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ChangePasswordResponse other = (ChangePasswordResponse) obj;
+		ChangeEmailResponse other = (ChangeEmailResponse) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;

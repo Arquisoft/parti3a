@@ -16,8 +16,8 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import es.uniovi.asw.Application;
-import es.uniovi.asw.participants.information.rest.GetParticipantInfoRequest;
-import es.uniovi.asw.participants.information.rest.GetParticipantInfoResponse;
+import es.uniovi.asw.participants.rest.get_info.GetParticipantInfoRequest;
+import es.uniovi.asw.participants.rest.get_info.GetParticipantInfoResponse;
 
 @SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)

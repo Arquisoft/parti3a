@@ -1,4 +1,4 @@
-package es.uniovi.asw.participants.information.html;
+package es.uniovi.asw.participants.html;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,9 +15,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.uniovi.asw.business.CitizenService;
 import es.uniovi.asw.model.Citizen;
-import es.uniovi.asw.participants.information.errors.BadRequestError;
-import es.uniovi.asw.participants.information.errors.ErrorInterface;
-import es.uniovi.asw.participants.information.utils.Check;
+import es.uniovi.asw.participants.errors.BadRequestError;
+import es.uniovi.asw.participants.errors.ErrorInterface;
+import es.uniovi.asw.util.Check;
 import es.uniovi.asw.util.Encrypter;
 
 /**
@@ -35,8 +35,10 @@ public class ChangeInfoControllerHTML {
 	@RequestMapping(value = "/cambiarEmail", method = RequestMethod.POST)
 	public String cambiarEmail(@RequestBody String parametros, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
+		
 		Citizen citizen = (Citizen) session.getAttribute("citizen");
-		if (citizen == null || citizen.getUser() == null || citizen.getUser().isAdmin())
+		if (citizen == null || citizen.getUser() == null 
+				|| citizen.getUser().isAdmin())
 			return "redirect:/";
 		
 		String[] parametro = parametros.split("&");
@@ -48,13 +50,16 @@ public class ChangeInfoControllerHTML {
 		Check.differentEmail(email, newEmail);
 		
 		//Todo correcto: cambiamos su e-mail y recargamos la página
-		citizenService.changeEmail(email, citizen.getUser().getPassword(), newEmail);
+		citizen.setEmail(newEmail);
+		citizenService.updateInfo(citizen);
+		
 		return "redirect:/datos";
 	}
 	
 	@RequestMapping(value = "/cambiarClave", method = RequestMethod.POST)
 	public String cambiarClave(@RequestBody String parametros, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
+		
 		Citizen citizen = (Citizen) session.getAttribute("citizen");
 		if (citizen == null || citizen.getUser() == null || citizen.getUser().isAdmin())
 			return "redirect:/";
@@ -72,8 +77,10 @@ public class ChangeInfoControllerHTML {
 		Check.passwordNotEmpty(newPassword);
 		Check.differentPassword(password, newPassword);
 		
-		//Todo correcto: cambiamos su e-mail y recargamos la página
-		citizenService.changePassword(email, password, newPassword);
+		//Todo correcto: cambiamos su password y recargamos la página
+		citizen.getUser().setPassword(newPassword);
+		citizenService.updateInfo(citizen);
+		
 		return "redirect:/datos";
 	}
 	

@@ -1,4 +1,4 @@
-package es.uniovi.asw.participants.information.rest;
+package es.uniovi.asw.participants.rest.change_info;
 
 /**
  * Representa la información que irá en el JSON cuando se 
@@ -9,20 +9,20 @@ package es.uniovi.asw.participants.information.rest;
  */
 public class ChangeEmailRequest {
 	
-	private String email;
+	private String login;
 	private String password;
 	private String newEmail;
 	
 	public ChangeEmailRequest(String email, String password, String newEmail) {	
-		this.email = email;
+		this.login = email;
 		this.password = password;
 		this.newEmail = newEmail;
 	}
 	
 	public ChangeEmailRequest() {}
 
-	public String getEmail() {
-		return email;
+	public String getLogin() {
+		return login;
 	}
 	
 	public String getPassword() {
@@ -37,7 +37,7 @@ public class ChangeEmailRequest {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((newEmail == null) ? 0 : newEmail.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
@@ -52,10 +52,10 @@ public class ChangeEmailRequest {
 		if (getClass() != obj.getClass())
 			return false;
 		ChangeEmailRequest other = (ChangeEmailRequest) obj;
-		if (email == null) {
-			if (other.email != null)
+		if (login == null) {
+			if (other.login != null)
 				return false;
-		} else if (!email.equals(other.email))
+		} else if (!login.equals(other.login))
 			return false;
 		if (newEmail == null) {
 			if (other.newEmail != null)
