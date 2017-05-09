@@ -45,4 +45,8 @@ public class CitizenServiceImpl implements CitizenService{
 		return citizenRepository.findAll();
 	}
 	
+	@Override
+	public Citizen getParticipant(String email, String password) {
+		return citizenRepository.findByEmailAndPassword(email, password);
+	}
 }

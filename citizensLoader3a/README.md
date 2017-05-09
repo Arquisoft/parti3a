@@ -13,5 +13,3 @@ Skeleton of Citizens Loader module
 * Jose Emilio Labra Gayo (@labra)
 * Alberto Cortina Eduarte (@AlbertoCortina)
 * Pelayo Álvarez García (@PelayoAlvarez)
-* Víctor Manuel Chávez García (@MaVic96)
-* Roberto Álvarez Menéndez (@robalvamenen)

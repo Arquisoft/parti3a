@@ -38,4 +38,9 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByUsernameAndPassword(username, password);
 	}
 	
+	@Override
+	public int findNumberOfAdmins() {
+		return userRepository.findNumberOfAdmins();
+	}
+	
 }
