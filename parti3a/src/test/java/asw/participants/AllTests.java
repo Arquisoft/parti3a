@@ -6,8 +6,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ 
-	//DbTest.class,
-	//GetParticipantInfoController.class
+	GetParticipantInfoControllerTest.class
 })
 public class AllTests {
 
