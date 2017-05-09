@@ -5,13 +5,13 @@ import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -19,7 +19,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import cucumber.api.java.Before;
 import es.uniovi.asw.Application;
 import es.uniovi.asw.participants.rest.get_info.GetParticipantInfoRequest;
 import es.uniovi.asw.participants.rest.get_info.GetParticipantInfoResponse;
@@ -56,7 +55,7 @@ public class GetParticipantInfoControllerTest {
 
 		// Invoking the API
 		ResponseEntity<GetParticipantInfoResponse> restResponse = restTemplate
-				.postForEntity(base.toString() + "/user", request, 
+				.postForEntity(base.toString() + "user", request, 
 						GetParticipantInfoResponse.class);
 
 		//Making sure the response exists and HTTP code is 200
@@ -80,7 +79,7 @@ public class GetParticipantInfoControllerTest {
 		
 		// Testing with wrong password
 		ResponseEntity<String> restResponse = 
-				restTemplate.postForEntity(base.toString() + "/user", 
+				restTemplate.postForEntity(base.toString() + "user", 
 				new GetParticipantInfoRequest("user1@me.com", "1234"), 
 				String.class);
 		
