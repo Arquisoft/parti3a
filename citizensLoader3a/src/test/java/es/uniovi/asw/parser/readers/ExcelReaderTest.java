@@ -26,7 +26,7 @@ public class ExcelReaderTest {
 	
 	@Test
 	public void testReader() {		
-		List<Citizen> lista = reader.read("test.xlsx");
+		List<Citizen> lista = reader.read("testPruebas.xlsx");
 		
 		//Compruebo Citizen 1
 		assertTrue(lista.get(0).getDni().equals(c1.getDni()));
