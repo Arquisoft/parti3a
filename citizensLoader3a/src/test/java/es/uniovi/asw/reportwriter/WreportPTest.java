@@ -27,9 +27,6 @@ public class WreportPTest {
 	
 	@Before
 	public void setUp() {
-//		WreportP reporter = WreportP.getInstance();
-//		WreportP reporter = new WreportP();
-		
 		//Log de trace
 		reporter.report("Error de prueba TRACE", "prueba.xlsx", Level.TRACE);
 		
@@ -78,8 +75,8 @@ public class WreportPTest {
 				}				
 			}
 			
-			bw = new BufferedWriter(new FileWriter(new File("src/test/resources/log/archivoTest.log")));
-			bw.write("");
+//			bw = new BufferedWriter(new FileWriter(new File("src/test/resources/log/archivoTest.log")));
+//			bw.write("");
 			
 		} catch (Exception e) {
 //			Console.println("No se encuentra el archivo");

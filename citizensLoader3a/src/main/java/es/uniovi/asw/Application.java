@@ -20,8 +20,11 @@ public class Application implements CommandLineRunner{
 	private ReadList rList;  
     
 	@Override
-	public void run(String... args) throws Exception {
-		loadUsers(args);		
+	public void run(String... args) throws Exception {		
+		System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////");
+		System.out.println("----------------------------------------CARGANDO CIUDADANOS----------------------------------------");
+		loadUsers(args);			
+		System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////");
 	}
 	
 	public void loadUsers(String... args) throws Exception {		

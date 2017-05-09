@@ -53,7 +53,7 @@ public class ExcelReader implements Reader {
 						Date fechaNacimiento = CitizenChecker.checkFechaNacimiento(row.getCell(3).getDateCellValue());
 						String residencia = CitizenChecker.checkResidencia(row.getCell(4).getStringCellValue());
 						String nacionalidad = CitizenChecker.checkNacionalidad(row.getCell(5).getStringCellValue());
-						String dni = CitizenChecker.checkDni(row.getCell(6).getStringCellValue());					
+						String dni = CitizenChecker.checkDni(row.getCell(6).getStringCellValue());	
 						
 						Citizen Citizen = new Citizen(nombre, apellidos, email, fechaNacimiento, residencia, nacionalidad, dni);
 						listaCitizens.add(Citizen);

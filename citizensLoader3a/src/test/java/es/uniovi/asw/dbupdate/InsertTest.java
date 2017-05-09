@@ -1,98 +1,108 @@
 package es.uniovi.asw.dbupdate;
 
+import static org.junit.Assert.*;
 
+import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 
+import org.junit.runners.MethodSorters;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import es.uniovi.asw.business.CitizenService;
+import es.uniovi.asw.business.UserService;
+import es.uniovi.asw.model.Association;
+import es.uniovi.asw.model.Citizen;
+import es.uniovi.asw.model.User;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING) 
 public class InsertTest {
 	
-	/*private RList rList = new RList();
-	DeleteP deleted =new DeleteP();
-	private Ciudadano c1;
-	private Ciudadano c2;
-	private Ciudadano c3;
+	@Autowired
+	private CitizenService citizenService;
 	
-	private Ciudadano ciud1;
-	private Ciudadano ciud2;
-	private Ciudadano ciud3;
-	private Ciudadano ciudInex;
+	@Autowired
+	private UserService userService;
+	
+	
+	private Citizen c1;
+	private Citizen c2;
+	private Citizen c3;
+	
+	private User u1;
+	private User u2;
+	private User u3;
 
-	@Test
-	public void testCargaCiudadanos() {
-		c1 = new Ciudadano("Juan", "Torres Pardo", "juan@example.com", null, null, "Español", "90500084Y");
-		c2 = new Ciudadano("Luis", "López Fernando", "luis@example.com", null, null, "Español", "19160962F");
-		c3 = new Ciudadano("Ana", "Torres Pardo", "ana@example.com", null, null, "Francés", "09940449X");
+	@Before
+	public void setUp() {
+		c1 = new Citizen("Juan", "Torres Pardo", "juan@example.com", null, "mi casa", "Español", "90500084Y");
+		u1 = new User("u1","u1", c1);		
+		Association.Asignar.link(u1, c1);
 		
-		rList.setReader(new ExcelReader());
-		//Metodo encargado de leer el fichero, de crear a los ciudadanos y de llamar al insert
-		rList.read("test.xlsx");
+		c2 = new Citizen("Luis", "López Fernando", "luis@example.com", null, "mi casa", "Español", "19160962F");
+		u2 = new User("u2"," u2", c2);
+		Association.Asignar.link( u2, c2);
+		
+		c3 = new Citizen("Ana", "Torres Pardo", "ana@example.com", null, "mi casa", "Francés", "09940449X");
+		u3 = new User("u3","u3", c3);
+		Association.Asignar.link(u3, c3);
+				
 	}
 	
 	@Test
-	public void testCiudadano1(){
-		try {
-			new CommandExecutor<Void>().execute(new Command<Void>() {
-				@Override
-				public Void execute() throws BusinessException {
-					ciud1 = CiudadanoFinder.findByDni("90500084Y");
-					deleted.delete(ciud1);
-					return null;
-				}
-			});
-		} catch (BusinessException e) {
-		}
+	public void t1_testInsertAndDeletes() {		
+		citizenService.addCitizen(c1);
+		userService.addUser(c1.getUser());
+		citizenService.addCitizen(c2);
+		userService.addUser(c2.getUser());
+		citizenService.addCitizen(c3);
+		userService.addUser(c3.getUser());
 		
-		assertFalse(ciud1 == null);
-		assert(!ciud1.equals(c1));
+		Citizen aux = citizenService.findCitizen(c1.getId());
+		assertEquals(c1.toString(), aux.toString());
+		
+		aux = citizenService.findCitizen(c2.getId());
+		assertEquals(c2.toString(), aux.toString());
+		
+		aux = citizenService.findCitizen(c3.getId());
+		assertEquals(c3.toString(), aux.toString());	
+		
+		User aux2 = userService.findUser(c1.getUser().getId());
+		assertEquals(c1.getUser().toString(), aux2.toString());
+		
+		aux2 = userService.findUser(c2.getUser().getId());
+		assertEquals(c2.getUser().toString(), aux2.toString());
+		
+		aux2 = userService.findUser(c3.getUser().getId());
+		assertEquals(c3.getUser().toString(), aux2.toString());
+		
+		citizenService.deleteCitizen(c1);
+		citizenService.deleteCitizen(c2);
+		citizenService.deleteCitizen(c3);
+		
+		User aux3 = userService.findUser(c1.getId());
+		assertNull(aux3);
+		
+		aux3 = userService.findUser(c2.getUser().getId());
+		assertNull(aux3);
+		
+		aux3 = userService.findUser(c3.getUser().getId());
+		assertNull(aux3);		
+		
+		Citizen aux4 = citizenService.findCitizen(c1.getId());
+		assertNull(aux4);
+		
+		aux4 = citizenService.findCitizen(c2.getId());
+		assertNull(aux4);
+		
+		aux4 = citizenService.findCitizen(c3.getId());
+		assertNull(aux4);	
 	}
 	
-	@Test
-	public void testCiudadano2(){
-		try {
-			new CommandExecutor<Void>().execute(new Command<Void>() {
-				@Override
-				public Void execute() throws BusinessException {
-					ciud2 = CiudadanoFinder.findByDni("19160962F");
-					deleted.delete(ciud2);
-					return null;
-				}
-			});
-		} catch (BusinessException e) {
-		}
-		
-		assertFalse(ciud2 == null);
-		assert(!ciud2.equals(c2));
-	}
-	
-	@Test
-	public void testCiudadano3(){
-		try {
-			new CommandExecutor<Void>().execute(new Command<Void>() {
-				@Override
-				public Void execute() throws BusinessException {
-					ciud3 = CiudadanoFinder.findByDni("09940449X");
-					deleted.delete(ciud3);
-					return null;
-				}
-			});
-		} catch (BusinessException e) {
-		}
-		
-		assertFalse(ciud3 == null);
-		assert(!ciud3.equals(c3));
-	}
-	
-	@Test
-	public void testCiudadanoInexistente(){
-		try {
-			new CommandExecutor<Void>().execute(new Command<Void>() {
-				@Override
-				public Void execute() throws BusinessException {
-					ciudInex = CiudadanoFinder.findByDni("01234567J");
-					return null;
-				}
-			});
-		} catch (BusinessException e) {
-		}
-		
-		assertTrue(ciudInex == null);
-	}*/
 }
