@@ -46,7 +46,7 @@ public class DataLoader implements ApplicationRunner {
 			
 			encryptedPass = Encrypter.getInstance().makeSHA1Hash("user1");
 			user = new User("user1", encryptedPass, citizen);
-			userService.addUser(user);
+			userService.addUser(user);		
 		}
 	}
 }
