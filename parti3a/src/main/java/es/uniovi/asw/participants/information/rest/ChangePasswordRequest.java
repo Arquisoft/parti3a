@@ -2,26 +2,25 @@ package es.uniovi.asw.participants.information.rest;
 
 /**
  * Representa la información que irá en el JSON cuando se 
- * piden los datos del usuario
+ * cambia la contraseña del participante
  * 
- * @author UO247242
+ * @author UO246008
  *  
  */
-public class GetParticipantInfoRequest {
+public class ChangePasswordRequest {
 	
 	private String login;
 	private String password;
+	private String newPassword;
 	
-	public GetParticipantInfoRequest(String login, String password) {	
-
+	public ChangePasswordRequest(String login, String password, String newPassword) {	
 		this.login = login;
 		this.password = password;
+		this.newPassword = newPassword;
 	}
 	
-	public GetParticipantInfoRequest() {}
+	public ChangePasswordRequest() {}
 
-	//Getters y Setters
-	
 	public String getLogin() {
 		return login;
 	}
@@ -30,11 +29,16 @@ public class GetParticipantInfoRequest {
 		return password;
 	}
 
+	public String getNewPassword() {
+		return newPassword;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + ((newPassword == null) ? 0 : newPassword.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
@@ -47,11 +51,16 @@ public class GetParticipantInfoRequest {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		GetParticipantInfoRequest other = (GetParticipantInfoRequest) obj;
+		ChangePasswordRequest other = (ChangePasswordRequest) obj;
 		if (login == null) {
 			if (other.login != null)
 				return false;
 		} else if (!login.equals(other.login))
+			return false;
+		if (newPassword == null) {
+			if (other.newPassword != null)
+				return false;
+		} else if (!newPassword.equals(other.newPassword))
 			return false;
 		if (password == null) {
 			if (other.password != null)

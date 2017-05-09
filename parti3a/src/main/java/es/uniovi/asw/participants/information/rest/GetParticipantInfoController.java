@@ -18,8 +18,7 @@ import es.uniovi.asw.participants.information.errors.ErrorInterface;
 import es.uniovi.asw.util.Encrypter;
 
 /**
- * Representa la información que irá en el JSON cuando se 
- * envíen sus datos al usuario
+ * Controller REST para obtener la información del participante
  * 
  * @author UO247242
  * 
@@ -59,7 +58,6 @@ public class GetParticipantInfoController implements GetParticipantInfo {
 
 	@ExceptionHandler(ErrorInterface.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
-	
 	public String handleErrorResponses(ErrorInterface error) {
 		return error.getJSONError();
 	}

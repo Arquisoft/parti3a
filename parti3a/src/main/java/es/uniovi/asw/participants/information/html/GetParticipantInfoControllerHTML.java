@@ -1,20 +1,17 @@
 package es.uniovi.asw.participants.information.html;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import es.uniovi.asw.model.Citizen;
-import es.uniovi.asw.participants.information.errors.ParticipantNotFound;
 import es.uniovi.asw.participants.information.errors.ErrorInterface;
-import es.uniovi.asw.persistence.CitizenRepository;
-import es.uniovi.asw.util.Encrypter;
 
 /**
  * Representa la información que irá en el JSON cuando se 
@@ -27,43 +24,37 @@ import es.uniovi.asw.util.Encrypter;
 @Controller
 public class GetParticipantInfoControllerHTML {
 
-	@Autowired
-	private CitizenRepository repository;
-
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String getLoginHtml(Model model) {
+	public String getLoginHtml(Model model, HttpSession session) {
+		Citizen citizen = (Citizen) session.getAttribute("citizen");
+    	if (citizen != null && citizen.getUser() != null) {
+    		return citizen.getUser().isAdmin() ? "redirect:/sugerencias" : "redirect:/datos";
+    	}
 		return "login";
 	}
-
-	@RequestMapping(value = "/validarsepart", method = RequestMethod.POST)
-	public String postUserHtml(@RequestBody String parametros, Model model) {
-
-		String[] parametro = parametros.split("&");
-
-		String email = parametro[0].split("=")[1].replace("%40", "@");
-		String contraseña = parametro[1].split("=")[1];
-
-		String contraseñaEncriptada = Encrypter.getInstance().makeSHA1Hash(contraseña);
-		Citizen user = repository.findByEmailAndPassword(email, contraseñaEncriptada);
-
-		if (user != null) {
-
-			model.addAttribute("email", user.getEmail());
-			model.addAttribute("firstName", user.getName());
-			model.addAttribute("lastName", user.getSurname());
-			model.addAttribute("nif", user.getDni());
-			model.addAttribute("address", user.getResidence());
-			model.addAttribute("nationality", user.getNationality());
-			model.addAttribute("admin", user.getUser().isAdmin());
-
-			if (user.getUser().isAdmin())
-				return "vistaSugerencias";
-			
-			return "datos";
-		}
-		else 
-			throw new ParticipantNotFound();
+	
+	@RequestMapping(value = "/cerrarSesion", method = RequestMethod.GET)
+	public String cerrarSesion(Model model, HttpSession session) {
+		session.setAttribute("citizen", null);
+		return "redirect:/";
 	}
+
+	@RequestMapping("/datos")
+    public String vistaDatos(Model model, HttpSession session) {
+		Citizen citizen = (Citizen) session.getAttribute("citizen");
+    	if (citizen == null || citizen.getUser() == null || citizen.getUser().isAdmin())
+    		return "redirect:/";
+    	
+		model.addAttribute("email", citizen.getEmail());
+		model.addAttribute("firstName", citizen.getName());
+		model.addAttribute("lastName", citizen.getSurname());
+		model.addAttribute("nif", citizen.getDni());
+		model.addAttribute("address", citizen.getResidence());
+		model.addAttribute("nationality", citizen.getNationality());
+		model.addAttribute("admin", citizen.getUser().isAdmin());
+		
+    	return "datos";
+    }
 
 	@ExceptionHandler(ErrorInterface.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)

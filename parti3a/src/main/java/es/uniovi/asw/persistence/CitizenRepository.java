@@ -20,5 +20,4 @@ public interface CitizenRepository extends JpaRepository<Citizen, Long> {
 	 Citizen findByEmailAndPassword(String email, String password);
 	 
 	 Citizen findByDni (String dni);
-	 
 }

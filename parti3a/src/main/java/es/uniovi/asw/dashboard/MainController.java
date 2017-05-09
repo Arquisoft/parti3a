@@ -1,9 +1,10 @@
 package es.uniovi.asw.dashboard;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,19 +30,11 @@ public class MainController {
     
     @Autowired
     private CitizenRepository repository;
-    
-    @RequestMapping("/")
-    public String landing(Model model, 
-    		@ModelAttribute("invalidUser") final boolean invalidUser) {
-    	model.addAttribute("invalidUser", invalidUser);
-        return "index";
-    }
-    
+
     @RequestMapping("/sugerencias")
-    public String vistaSugerencias(Model model,
-    		@ModelAttribute("user") final Citizen citizen) {
-    	
-    	if (citizen == null || citizen.getUser() == null)
+    public String vistaSugerencias(Model model, HttpSession session) {
+    	Citizen citizen = (Citizen) session.getAttribute("citizen");
+    	if (citizen == null || citizen.getUser() == null || !citizen.getUser().isAdmin())
     		return "redirect:/";
     	
     	model.addAttribute("sugerencias", sugerenciaRepository.findAll());
@@ -49,26 +42,12 @@ public class MainController {
         return "vistaSugerencias";
     }
     
-    @RequestMapping("/datos")
-    public String vistaDatos(Model model,
-    		@ModelAttribute("user") final Citizen citizen) {
-
-    	if (citizen == null || citizen.getUser() == null)
+    @RequestMapping(path = "/sugerencias/{id}", method = RequestMethod.GET)
+	public String detalles(@PathVariable("id") String id, Model model, HttpSession session) {
+    	Citizen citizen = (Citizen) session.getAttribute("citizen");
+    	if (citizen == null || citizen.getUser() == null || !citizen.getUser().isAdmin())
     		return "redirect:/";
     	
-		model.addAttribute("email", citizen.getEmail());
-		model.addAttribute("firstName", citizen.getName());
-		model.addAttribute("lastName", citizen.getSurname());
-		model.addAttribute("nif", citizen.getDni());
-		model.addAttribute("address", citizen.getResidence());
-		model.addAttribute("nationality", citizen.getNationality());
-		model.addAttribute("admin", citizen.getUser().isAdmin());
-		
-    	return "datos";
-    }
-
-    @RequestMapping(path = "/sugerencias/{id}", method = RequestMethod.GET)
-	public String detalles(@PathVariable("id") String id, Model model) {
     	Long ident = Long.valueOf(id);
     	Suggestion sugerencia = sugerenciaRepository.findOne(ident);
 		model.addAttribute("id", id);
@@ -80,7 +59,7 @@ public class MainController {
     
     @RequestMapping(value = "/validarse", method = RequestMethod.POST)
 	public String postUserHtml(@RequestBody String parametros, Model model,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, HttpSession session) {
 
 		String[] parametro = parametros.split("&");
 
@@ -92,7 +71,7 @@ public class MainController {
 
 		if (user != null) {
 			
-			redirectAttributes.addFlashAttribute("user", user);
+			session.setAttribute("citizen", user);
 			
 			if (user.getUser().isAdmin())
 				return "redirect:/sugerencias";

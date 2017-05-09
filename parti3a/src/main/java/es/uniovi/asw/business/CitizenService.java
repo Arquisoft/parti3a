@@ -17,4 +17,7 @@ public interface CitizenService {
 	public List<Citizen> findAllCitizens ();
 	
 	public Citizen getParticipant(String email, String password);
+	
+	public void changeEmail(String email, String password, String newEmail);
+	public void changePassword(String email, String password, String newPassword);
 }
