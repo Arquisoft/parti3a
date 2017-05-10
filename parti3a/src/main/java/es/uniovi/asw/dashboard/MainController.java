@@ -81,7 +81,11 @@ public class MainController {
 			session.setAttribute("citizen", user);
 			session.setAttribute("user", user.getUser());
 			
-			return "intermedio";
+			if(user.getUser().isAdmin()){
+				return "intermedioAdmin";
+			}
+			return "intermedioUser";
+			
 		} else { 
 			//Ciudadano no encontrado
 			redirectAttributes.addFlashAttribute("invalidUser", true);
@@ -95,6 +99,11 @@ public class MainController {
     	if (user.getUser().isAdmin())
 			return "redirect:/sugerencias";
 		
+		return "redirect:/datos";
+    }
+    
+    @RequestMapping(value = "/pasoParticipants", method = RequestMethod.POST)
+    public String pasoParticipants(Model model, HttpSession session){		
 		return "redirect:/datos";
     }
     
