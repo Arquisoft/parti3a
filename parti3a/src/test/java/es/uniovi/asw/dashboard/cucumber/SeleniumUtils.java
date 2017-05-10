@@ -1,4 +1,4 @@
-package asw.dashboard.cucumber;
+package es.uniovi.asw.dashboard.cucumber;
 
 import static org.junit.Assert.assertTrue;
 

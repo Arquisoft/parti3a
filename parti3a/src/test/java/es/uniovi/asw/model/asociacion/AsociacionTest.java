@@ -1,4 +1,4 @@
-package asw.model.asociacion;
+package es.uniovi.asw.model.asociacion;
 
 import static org.junit.Assert.*;
 

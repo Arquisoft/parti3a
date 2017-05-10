@@ -8,11 +8,11 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import pSystem.Application;
-import pSystem.SistemaDeParticipacion.ManageComment;
-import pSystem.SistemaDeParticipacion.ManageSuggestion;
-import pSystem.model.Comment;
-import pSystem.model.Suggestion;
+import es.uniovi.asw.Application;
+import es.uniovi.asw.ParticipationSystem.SistemaDeParticipacion.ManageComment;
+import es.uniovi.asw.ParticipationSystem.SistemaDeParticipacion.ManageSuggestion;
+import es.uniovi.asw.model.Comment;
+import es.uniovi.asw.model.Suggestion;
 
 @ContextConfiguration(classes=Application.class)
 public class AñadirComentarioTest {

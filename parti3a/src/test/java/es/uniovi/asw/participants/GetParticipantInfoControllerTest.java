@@ -1,4 +1,4 @@
-package asw.participants;
+package es.uniovi.asw.participants;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

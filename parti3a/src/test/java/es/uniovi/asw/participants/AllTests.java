@@ -1,4 +1,4 @@
-package asw.participants;
+package es.uniovi.asw.participants;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

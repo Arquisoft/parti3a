@@ -1,14 +1,14 @@
-package asw.model;
+package es.uniovi.asw.model;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import asw.model.asociacion.AsociacionTest;
-import asw.model.dominio.CategoriaTest;
-import asw.model.dominio.ComentarioTest;
-import asw.model.dominio.SugerenciaTest;
-import asw.model.dominio.UsuarioTest;
+import es.uniovi.asw.model.asociacion.AsociacionTest;
+import es.uniovi.asw.model.dominio.CategoriaTest;
+import es.uniovi.asw.model.dominio.ComentarioTest;
+import es.uniovi.asw.model.dominio.SugerenciaTest;
+import es.uniovi.asw.model.dominio.UsuarioTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ 

@@ -1,4 +1,4 @@
-package asw.model.dominio;
+package es.uniovi.asw.model.dominio;
 
 import static org.junit.Assert.*;
 
