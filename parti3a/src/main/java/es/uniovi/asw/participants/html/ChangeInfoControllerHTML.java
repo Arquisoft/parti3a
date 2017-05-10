@@ -91,4 +91,12 @@ public class ChangeInfoControllerHTML {
 		attrs.addFlashAttribute("errorPresent", true);
 		return "redirect:/datos";
 	}
+	
+	@ExceptionHandler(ErrorInterface.class)
+	@ResponseStatus(value = HttpStatus.NOT_FOUND)
+	public String handleErrorResponseNotFound(ErrorInterface excep, Model model) {
+		model.addAttribute("error", excep.getStringError());
+
+		return "error";
+	}
 }
