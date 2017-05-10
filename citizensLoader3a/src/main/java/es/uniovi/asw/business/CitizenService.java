@@ -1,5 +1,7 @@
 package es.uniovi.asw.business;
 
+import java.util.List;
+
 import es.uniovi.asw.model.Citizen;
 
 public interface CitizenService {
@@ -12,5 +14,6 @@ public interface CitizenService {
 	
 	//Otros 
 	public Citizen findByDni (String dni);
+	public List<Citizen> addCitizens (List<Citizen> citizens);
 	
 }

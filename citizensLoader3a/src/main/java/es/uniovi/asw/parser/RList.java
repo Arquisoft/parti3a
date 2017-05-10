@@ -36,7 +36,11 @@ public class RList implements ReadList {
 	public void read(String fichero) {			
 		ciudadanos = reader.read(fichero);
 		crearUsuarios();
+		long start, end;
+		start = System.currentTimeMillis();	
 		List<Citizen> insertados = insertarCiudadanos(ciudadanos, fichero);	
+		end = System.currentTimeMillis();
+		System.out.println("Insercion TARDA: "+ (end - start)+" milisegundos");
 		if (insertados != null)
 			crearEmail(insertados);	
 	}	

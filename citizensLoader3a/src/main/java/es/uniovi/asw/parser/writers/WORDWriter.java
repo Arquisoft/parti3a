@@ -10,7 +10,6 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 import es.uniovi.asw.model.Citizen;
-import es.uniovi.asw.util.Console;
 
 public class WORDWriter implements Writer {
 
@@ -46,7 +45,7 @@ public class WORDWriter implements Writer {
 			
 			documento.write(out);
 		} catch (IOException e) {
-			Console.println("Error en WordWriter, no se pude escribir el fichero");
+			System.out.println("Error en WordWriter, no se pude escribir el fichero");
 		}			
 	}
 }

@@ -1,5 +1,7 @@
 package es.uniovi.asw.business;
 
+import java.util.List;
+
 import es.uniovi.asw.model.User;
 
 public interface UserService {
@@ -10,5 +12,7 @@ public interface UserService {
 	public void updateUser (User user);
 	public User findUser (Long userId);
 	
+	//Otros
+	public List<User> addUsers (List<User> users);
 	
 }

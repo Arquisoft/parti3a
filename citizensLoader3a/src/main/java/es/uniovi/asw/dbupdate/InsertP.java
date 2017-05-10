@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.uniovi.asw.business.CitizenService;
 import es.uniovi.asw.business.UserService;
@@ -28,8 +29,10 @@ public class InsertP implements Insert {
 	
 	
 	@Override
+	@Transactional
 	public List<Citizen> insert(List<Citizen> citizens, String file) {
-		
+		List<Citizen> citizensToInsert = new ArrayList<Citizen>();
+		List<User> usersToInsert = new ArrayList<User>();
 		List<Citizen> citizensInserted = new ArrayList<Citizen>();
 		for(Citizen c: citizens) {
 			Citizen aux = citizenService.findByDni(c.getDni());
@@ -38,8 +41,10 @@ public class InsertP implements Insert {
 				String password = c.getUser().getPassword();								
 				User user = c.getUser();
 				user.setPassword(Encrypter.getInstance().makeSHA1Hash(user.getPassword()));
-				citizenService.addCitizen(c);
-				userService.addUser(user);
+//				citizenService.addCitizen(c);
+//				userService.addUser(user);
+				citizensToInsert.add(c);
+				usersToInsert.add(user);
 				user.setPassword(password);
 				citizensInserted.add(c);
 			}
@@ -48,6 +53,8 @@ public class InsertP implements Insert {
 				writeReport.report(error, file, Level.ERROR);
 			}
 		}
+		citizenService.addCitizens(citizensToInsert);
+		userService.addUsers(usersToInsert);
 		return citizensInserted;
 	}
 }
