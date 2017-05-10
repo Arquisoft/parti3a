@@ -10,6 +10,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import es.uniovi.asw.business.CategoryService;
 import es.uniovi.asw.business.CitizenService;
 import es.uniovi.asw.business.SuggestionService;
 import es.uniovi.asw.business.UserService;
@@ -32,6 +33,9 @@ public class DataLoader implements ApplicationRunner {
 	@Autowired
 	private SuggestionService suggestionService;
 
+	@Autowired
+	private CategoryService categoryService;
+	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		// Creamos usuarios si es que no existían ya
@@ -74,7 +78,9 @@ public class DataLoader implements ApplicationRunner {
 
 		if (!suggestionFound) {
 			User user = userService.findByUsernameAndPassword("user1", Encrypter.getInstance().makeSHA1Hash("user1"));
-			Suggestion sugerencia = new Suggestion("Sugerencia prueba", new Category("Categoría testing"), user);
+			Category category = new Category("Categoría testing");
+			categoryService.addCategory(category);
+			Suggestion sugerencia = new Suggestion("Sugerencia prueba", category, user);
 			suggestionService.addSuggestion(sugerencia);
 		}
 	}
