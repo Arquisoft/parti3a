@@ -61,7 +61,7 @@ public class DataExcelLoader {
 	            			cell.setCellValue("DNI");	
 	            			break;
             		}
-            	}
+            	}            	
             	else {
             		switch (c) {
 		            	case 0:		            		
@@ -74,9 +74,9 @@ public class DataExcelLoader {
 		        			cell.setCellValue("emailUser"+r+"@example.com");
 		        			break;
 		        		case 3:	
-		        			SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+		        			SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
 		        			cell.setCellType(CellType.NUMERIC);
-		        			cell.setCellValue(formateador.parse("01/01/1994"));
+		        			cell.setCellValue(formateador.parse("01-01-1994"));
 		        			break;
 		        		case 4:
 		        			cell.setCellValue("Dirección postalUser"+r);

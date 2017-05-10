@@ -8,12 +8,16 @@ import org.springframework.stereotype.Service;
 import es.uniovi.asw.business.CitizenService;
 import es.uniovi.asw.model.Citizen;
 import es.uniovi.asw.persistence.CitizenRepository;
+import es.uniovi.asw.persistence.UserRepository;
 
 @Service
 public class CitizenServiceImpl implements CitizenService{
 
 	@Autowired
 	private CitizenRepository citizenRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Override
 	public Citizen addCitizen(Citizen citizen) {
@@ -27,6 +31,7 @@ public class CitizenServiceImpl implements CitizenService{
 
 	@Override
 	public void updateInfo(Citizen citizen) {
+		userRepository.save(citizen.getUser());
 		citizenRepository.save(citizen);
 	}
 

@@ -25,12 +25,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- Si queremos que nos salga la traza de spring comentar -->
 			<exclusions>
 		        <exclusion>
 		            <groupId>org.springframework.boot</groupId>
 		            <artifactId>spring-boot-starter-logging</artifactId>
 		        </exclusion>
-		    </exclusions>			
+		    </exclusions>	
 		</dependency>
 	
 		<dependency>

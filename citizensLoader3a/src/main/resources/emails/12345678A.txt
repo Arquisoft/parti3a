@@ -1,6 +1,6 @@
 
 Hola Nombre Apellido1 Apellido2,
-Este correo es para informarle de que ha sido dado de alta correctamente en el sistema de participación ciudadana. A continuación, le comunicamos su usuario y contraseña: 
+Este correo es para informarle de que ha sido dado de alta correctamente en el sistema de participaciÃ³n ciudadana. A continuaciÃ³n, le comunicamos su usuario y contraseÃ±a: 
 
 	Usuario: usuario
-	Contraseña: contraseña
+	ContraseÃ±a: contraseÃ±a

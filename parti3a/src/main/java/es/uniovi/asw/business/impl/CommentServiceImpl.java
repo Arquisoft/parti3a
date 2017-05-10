@@ -4,6 +4,7 @@ package es.uniovi.asw.business.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaContext;
 import org.springframework.stereotype.Service;
 
 import es.uniovi.asw.business.CommentService;
@@ -15,6 +16,9 @@ import es.uniovi.asw.persistence.CommentRepository;
 public class CommentServiceImpl implements CommentService {
 	
 	@Autowired
+	private JpaContext jpaContext;
+	
+	@Autowired
 	private CommentRepository commentRepository;
 
 	@Override
@@ -24,7 +28,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public void deleteComment(Comment comment) {
-		commentRepository.delete(comment);
+		jpaContext.getEntityManagerByManagedType(Comment.class).remove(comment);
 	}
 
 	@Override

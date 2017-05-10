@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Elección de módulo</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="login_styles.css" />
+<style>
+.logout-section {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="logout-section">
+			<a href="/cerrarSesion">Cerrar sesión</a>
+		</div>
+		<div class="form-signin">
+				<h2>Seleccione módulo</h2>
+					<form th:action="@{/pasoDashboard}" method="POST">
+						<div align="center">
+							 <button style="margin-bottom: 10px;" class="btn btn-lg btn-primary btn-block" id="pasoDashboard" type="submit">Dashboard</button>
+					    </div>
+					</form>
+					<form th:action="@{/pasoPSystem}" method="POST">
+						<div align="center">
+							 <button style="margin-top: 10px;" class="btn btn-lg btn-primary btn-block" id="pasoPSystem" type="submit">Participation System</button>
+					    </div>
+					</form>
+		</div>
+	</div>
+</body>
+</html>

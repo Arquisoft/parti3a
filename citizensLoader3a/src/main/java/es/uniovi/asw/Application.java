@@ -11,7 +11,6 @@ import es.uniovi.asw.parser.writers.PDFWriter;
 import es.uniovi.asw.parser.writers.TXTWriter;
 import es.uniovi.asw.parser.writers.WORDWriter;
 import es.uniovi.asw.parser.writers.Writer;
-import es.uniovi.asw.util.Console;
 
 @Component
 public class Application implements CommandLineRunner{		
@@ -21,9 +20,13 @@ public class Application implements CommandLineRunner{
     
 	@Override
 	public void run(String... args) throws Exception {		
+		long start, end;
 		System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////");
 		System.out.println("----------------------------------------CARGANDO CIUDADANOS----------------------------------------");
-		loadUsers(args);			
+		start = System.currentTimeMillis();
+		loadUsers(args);		
+		end = System.currentTimeMillis();
+		System.out.println("TARDA: "+ (end - start)+" milisegundos");
 		System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////");
 	}
 	
@@ -70,21 +73,21 @@ public class Application implements CommandLineRunner{
 	}
 	
 	private static void mostrarAyuda(){
-		Console.println("Este sistema dispone de las siguientes opciones:");
-		Console.println("\t-Si desea ejecutar el programa haga lo siguiente:\n"
+		System.out.println("Este sistema dispone de las siguientes opciones:");
+		System.out.println("\t-Si desea ejecutar el programa haga lo siguiente:\n"
 				+ "\t\t- Escriba 'load' 'espacio en blanco' 'fichero.xlsx' 'espacio en blanco'"
 				+ " 'formato del correo'\n"
 				+ "\t\t- El formato del correo puede ser: TXT, DOCX o PDF");
-		Console.println("\t-Si desea obtener información sobre el sistema:\n"
+		System.out.println("\t-Si desea obtener información sobre el sistema:\n"
 				+ "\t\t- Escriba el comando 'info'");
-		Console.println("\t-Si desea ver el sistema de ayuda:\n"
+		System.out.println("\t-Si desea ver el sistema de ayuda:\n"
 				+ "\t\t- Escriba el comando '--help' (si no introduce ningún comando"
 				+ " también visualizará el sistema de ayuda).");
 	}
 	
 	private static void mostrarInfo() {
-		Console.println("Arquisoft citizensLoader3a");		
-		Console.println("Mas información en el repositorio git: "
+		System.out.println("Arquisoft citizensLoader3a");		
+		System.out.println("Mas información en el repositorio git: "
 				+ "https://github.com/Arquisoft/citizensLoader3a.git");
 	}
 	
@@ -93,7 +96,7 @@ public class Application implements CommandLineRunner{
 			return new ExcelReader();
 		} 
 		//Segun tengamos más tipos de readers se añadirían aquí
-		Console.println("Fichero con extensión incorrecta.\nRecuerde que la extensión ha de ser xlsx");
+		System.out.println("Fichero con extensión incorrecta.\nRecuerde que la extensión ha de ser xlsx");
 		return null;
 	}
 	
@@ -108,13 +111,13 @@ public class Application implements CommandLineRunner{
 			return new PDFWriter();
 		}
 		//Según tengamos más tipo de writers se añadirían aquí
-		Console.println("El formato con el que desea enviar los correos es incorrecto.\n"
+		System.out.println("El formato con el que desea enviar los correos es incorrecto.\n"
 				+ "Recuerde que el formato ha de ser:\n"
 				+ "- TXT, DOCX o PDF");
 		return null;
 	}
 	
 	private static void error(){
-		Console.println("Orden desconocida.");
+		System.out.println("Orden desconocida.");
 	}		
 }
