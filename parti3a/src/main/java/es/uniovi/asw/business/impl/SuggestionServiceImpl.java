@@ -2,11 +2,14 @@ package es.uniovi.asw.business.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaContext;
 import org.springframework.stereotype.Service;
 
 import es.uniovi.asw.business.SuggestionService;
+import es.uniovi.asw.model.Category;
 import es.uniovi.asw.model.Suggestion;
 import es.uniovi.asw.model.SuggestionVote;
 import es.uniovi.asw.model.User;
@@ -14,6 +17,7 @@ import es.uniovi.asw.model.types.VoteStatus;
 import es.uniovi.asw.persistence.SuggestionRepository;
 
 @Service
+@Transactional
 public class SuggestionServiceImpl implements SuggestionService {
 	
 	@Autowired
@@ -24,7 +28,10 @@ public class SuggestionServiceImpl implements SuggestionService {
 
 	@Override
 	public Suggestion addSuggestion(Suggestion suggestion) {
-		return suggestionRepository.save(suggestion);
+		Category c = jpaContext.getEntityManagerByManagedType(Category.class).merge(suggestion.getCategory());
+		User u = jpaContext.getEntityManagerByManagedType(User.class).merge(suggestion.getUser());
+		Suggestion s = new Suggestion(suggestion.getContents(), c, u);
+		return suggestionRepository.save(s);
 	}
 
 	@Override

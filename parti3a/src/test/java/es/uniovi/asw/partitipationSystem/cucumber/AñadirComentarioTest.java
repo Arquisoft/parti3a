@@ -18,7 +18,6 @@ import es.uniovi.asw.model.Category;
 import es.uniovi.asw.model.Citizen;
 import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.Suggestion;
-import es.uniovi.asw.persistence.SuggestionRepository;
 import es.uniovi.asw.util.Encrypter;
 
 @ContextConfiguration(classes=Application.class)
@@ -33,9 +32,6 @@ public class AñadirComentarioTest {
 	@Autowired
 	private CitizenService citizenService;
 	
-	@Autowired
-	private SuggestionRepository rpo;
-	
 	private Suggestion suggestion;
 	
 	private Comment comment;
@@ -47,8 +43,8 @@ public class AñadirComentarioTest {
 		List<Category> listaCategorias = manageSuggestion.findSuggestionCategories();
 		String contraseñaEncripatada = Encrypter.getInstance().makeSHA1Hash("user1");
 		Citizen citizen = citizenService.findByEmailAndPassword("user1@me.com", contraseñaEncripatada);
-		suggestion = new Suggestion("Contenido", citizen.getUser(), null);
-		suggestion = rpo.save(suggestion);
+		suggestion = new Suggestion("Contenido", citizen.getUser(), listaCategorias.get(0));
+		suggestion = manageSuggestion.addSuggestion(suggestion);
 	}
 	
 	@When("^contenido del comentario \"([^\"]*)\"$")
