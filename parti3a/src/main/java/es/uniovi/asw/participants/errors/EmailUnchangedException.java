@@ -1,4 +1,4 @@
-package es.uniovi.asw.participants.information.errors;
+package es.uniovi.asw.participants.errors;
 
 public class EmailUnchangedException extends BadRequestError {
 

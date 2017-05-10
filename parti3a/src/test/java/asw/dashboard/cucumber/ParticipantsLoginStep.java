@@ -19,18 +19,18 @@ import es.uniovi.asw.Application;
 @ContextConfiguration(classes = Application.class, loader = SpringApplicationContextLoader.class)
 @IntegrationTest
 @WebAppConfiguration
-public class DashboardLoginStep {
+public class ParticipantsLoginStep {
 
 	private WebDriver driver;
 
-	@Given("^the politician is in the login page$")
+	@Given("^the participant is in the login page$")
 	public void isInLoginPage() {
 		driver = new HtmlUnitDriver(true);
 		driver.get("http://locahost:8090/");
 		driver.navigate().to("http://localhost:8090/");
 	}
 
-	@Then("^introduces his credentials, \"(.+)\" and \"(.+)\" into the login form$")
+	@Then("^introduces credentials, \"(.+)\" and \"(.+)\" into the login form$")
 	public void insertCredentials(String mail, String psw) {
 		driver.findElement(By.name("email")).click();
 		driver.findElement(By.name("email")).sendKeys(mail);
@@ -39,13 +39,18 @@ public class DashboardLoginStep {
 		driver.findElement(By.name("password")).sendKeys(psw);
 	}
 
-	@When("^he pushes the \"Log in\" button$")
+	@When("^pushes the \"Log in\" button$")
 	public void pushLogIn() {
 		driver.findElement(By.cssSelector("button[type=submit]")).click();
 	}
 
-	@And("^he gets redirected to the dashboard view$")
+	@And("^he gets redirected to the participants view$")
 	public void isInDashboard() {
-		assertEquals("Dashboard3a - Listado sugerencias", driver.getTitle());
+		assertEquals("Participants3a - Datos", driver.getTitle());
+		SeleniumUtils.textoPresentePagina(driver, "E-mail: user1@me.com");
+		SeleniumUtils.textoPresentePagina(driver, "Nombre: Juan Rodríguez García");
+		SeleniumUtils.textoPresentePagina(driver, "NIF: 14321234Z");
+		SeleniumUtils.textoPresentePagina(driver, "Dirección: Oviedo");
+		SeleniumUtils.textoPresentePagina(driver, "Nacionalidad: ESP");
 	}
 }

@@ -1,4 +1,4 @@
-package es.uniovi.asw.participants.information.rest;
+package es.uniovi.asw.participants.rest.get_info;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.uniovi.asw.business.CitizenService;
 import es.uniovi.asw.model.Citizen;
-import es.uniovi.asw.participants.information.errors.ParticipantNotFound;
-import es.uniovi.asw.participants.information.errors.ErrorInterface;
+import es.uniovi.asw.participants.errors.ErrorInterface;
+import es.uniovi.asw.participants.errors.ParticipantNotFound;
 import es.uniovi.asw.util.Encrypter;
 
 /**
@@ -46,7 +46,7 @@ public class GetParticipantInfoController implements GetParticipantInfo {
 		String password = form.getPassword();		
 		String encryptedPassword = Encrypter.getInstance().makeSHA1Hash(password);
 
-		Citizen ciudadano = citizenService.getParticipant(email, encryptedPassword);		
+		Citizen ciudadano = citizenService.findByEmailAndPassword(email, encryptedPassword);		
 
 		if (ciudadano != null) 
 		{					

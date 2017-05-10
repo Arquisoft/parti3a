@@ -1,4 +1,4 @@
-package es.uniovi.asw.participants.information.rest;
+package es.uniovi.asw.participants.rest.get_info;
 
 import es.uniovi.asw.model.Citizen;
 

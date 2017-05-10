@@ -1,4 +1,4 @@
-package es.uniovi.asw.participants.information.html;
+package es.uniovi.asw.participants.html;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import es.uniovi.asw.model.Citizen;
-import es.uniovi.asw.participants.information.errors.ErrorInterface;
+import es.uniovi.asw.participants.errors.ErrorInterface;
 
 /**
  * Representa la información que irá en el JSON cuando se 

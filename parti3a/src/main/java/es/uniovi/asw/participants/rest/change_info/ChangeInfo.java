@@ -1,4 +1,4 @@
-package es.uniovi.asw.participants.information.rest;
+package es.uniovi.asw.participants.rest.change_info;
 
 import org.springframework.http.ResponseEntity;
 
@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
  */
 public interface ChangeInfo {
 
-	public ResponseEntity<ChangeEmailResponse> changeEmail(ChangeEmailRequest form);
-	
+	public ResponseEntity<ChangeEmailResponse> changeEmail(ChangeEmailRequest form);	
 	public ResponseEntity<ChangePasswordResponse> changePassword(ChangePasswordRequest form);
 }
