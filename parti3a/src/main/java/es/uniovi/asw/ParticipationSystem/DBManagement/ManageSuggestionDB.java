@@ -13,6 +13,7 @@ import es.uniovi.asw.model.types.VoteStatus;
 public interface ManageSuggestionDB {
 	
 	public Suggestion addSuggestion(Suggestion suggestion);
+	public Suggestion addSuggestionRest(Suggestion suggestion);
 	public void updateSuggestion(Suggestion sugerencia);
 	public void deleteSuggestion(Long id);
 	public Suggestion getSuggestion(Long id);

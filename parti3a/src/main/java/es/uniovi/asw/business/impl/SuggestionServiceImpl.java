@@ -65,6 +65,11 @@ public class SuggestionServiceImpl implements SuggestionService {
 		return suggestionRepository.findAll();
 	}
 
+	@Override
+	public Suggestion addSuggestionRest(Suggestion suggestion) {
+		return suggestionRepository.save(suggestion);
+	}
+
 	
 	
 }

@@ -80,4 +80,20 @@ public class ManageSuggestionP implements ManageSuggestion {
 	public RestringedWords addRestringedWord(RestringedWords word) {
 		return manageSuggestionDB.addRestringedWord(word);
 	}
+
+	@Override
+	public Suggestion addSuggestionRest(Suggestion sugerencia) {
+		List<RestringedWords> prohibidas = findSuggestionRestringedWords();
+		boolean contiene=false;
+		for(RestringedWords r: prohibidas){
+			if(sugerencia.getContents().toUpperCase().contains(r.getWord().toUpperCase())){
+				contiene=true;
+				break;
+			}
+		}
+		if(!contiene){
+			return manageSuggestionDB.addSuggestionRest(sugerencia);
+		}
+		return null;
+	}
 }

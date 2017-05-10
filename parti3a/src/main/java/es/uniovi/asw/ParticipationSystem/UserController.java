@@ -53,7 +53,7 @@ public class UserController {
 	public String añadirSugerencia(HttpSession session, Model model, @RequestParam String contenido) {
 		List<Category> categorias = manageSuggestion.findSuggestionCategories();
 		Suggestion suggestion = new Suggestion(contenido, (User) session.getAttribute("user"), categorias.get(0));
-		manageSuggestion.addSuggestion(suggestion);
+		manageSuggestion.addSuggestionRest(suggestion);
 		List<Suggestion> sugerencias = manageSuggestion.getSuggestions();
 		model.addAttribute("sugerencias", sugerencias);
 		return "listaSugerencias";
