@@ -38,6 +38,15 @@ public class DataLoader implements ApplicationRunner {
 			User user = new User("admin", encryptedPass, citizen);
 			user.setAdmin(true);
 			userService.addUser(user);
+			
+			citizen = new Citizen(
+					"Juan", "Rodríguez García", "user1@me.com", new Date(),
+					"Oviedo", "ESP", "14321234Z");
+			citizenService.addCitizen(citizen);
+			
+			encryptedPass = Encrypter.getInstance().makeSHA1Hash("user1");
+			user = new User("user1", encryptedPass, citizen);
+			userService.addUser(user);		
 		}
 	}
 }

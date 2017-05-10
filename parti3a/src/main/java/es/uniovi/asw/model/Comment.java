@@ -41,6 +41,12 @@ public class Comment implements Serializable {
 
 	public Comment(String contents, Suggestion suggestion, User user) {
 		this.contents = contents;
+		this.creationDate = new Date();
+		Association.AsignarComentario.link(this, suggestion, user);
+	}
+	
+	public Comment(String contents, User user, Suggestion suggestion) {
+		this.contents = contents;
 		this.suggestion = suggestion;
 		this.user = user;
 		this.creationDate = new Date();

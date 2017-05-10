@@ -1,17 +1,22 @@
 package es.uniovi.asw.dashboard;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import es.uniovi.asw.ParticipationSystem.SistemaDeParticipacion.ManageSuggestion;
 import es.uniovi.asw.model.Citizen;
 import es.uniovi.asw.model.Suggestion;
+import es.uniovi.asw.model.User;
 import es.uniovi.asw.persistence.CitizenRepository;
 import es.uniovi.asw.persistence.CommentRepository;
 import es.uniovi.asw.persistence.SuggestionRepository;
@@ -30,18 +35,13 @@ public class MainController {
     @Autowired
     private CitizenRepository repository;
     
-    @RequestMapping("/")
-    public String landing(Model model, 
-    		@ModelAttribute("invalidUser") final boolean invalidUser) {
-    	model.addAttribute("invalidUser", invalidUser);
-        return "index";
-    }
-    
+    @Autowired
+    private ManageSuggestion manageSuggestion;
+
     @RequestMapping("/sugerencias")
-    public String vistaSugerencias(Model model,
-    		@ModelAttribute("user") final Citizen citizen) {
-    	
-    	if (citizen == null || citizen.getUser() == null)
+    public String vistaSugerencias(Model model, HttpSession session) {
+    	Citizen citizen = (Citizen) session.getAttribute("citizen");
+    	if (citizen == null || citizen.getUser() == null || !citizen.getUser().isAdmin())
     		return "redirect:/";
     	
     	model.addAttribute("sugerencias", sugerenciaRepository.findAll());
@@ -49,26 +49,12 @@ public class MainController {
         return "vistaSugerencias";
     }
     
-    @RequestMapping("/datos")
-    public String vistaDatos(Model model,
-    		@ModelAttribute("user") final Citizen citizen) {
-
-    	if (citizen == null || citizen.getUser() == null)
+    @RequestMapping(path = "/sugerencias/{id}", method = RequestMethod.GET)
+	public String detalles(@PathVariable("id") String id, Model model, HttpSession session) {
+    	Citizen citizen = (Citizen) session.getAttribute("citizen");
+    	if (citizen == null || citizen.getUser() == null || !citizen.getUser().isAdmin())
     		return "redirect:/";
     	
-		model.addAttribute("email", citizen.getEmail());
-		model.addAttribute("firstName", citizen.getName());
-		model.addAttribute("lastName", citizen.getSurname());
-		model.addAttribute("nif", citizen.getDni());
-		model.addAttribute("address", citizen.getResidence());
-		model.addAttribute("nationality", citizen.getNationality());
-		model.addAttribute("admin", citizen.getUser().isAdmin());
-		
-    	return "datos";
-    }
-
-    @RequestMapping(path = "/sugerencias/{id}", method = RequestMethod.GET)
-	public String detalles(@PathVariable("id") String id, Model model) {
     	Long ident = Long.valueOf(id);
     	Suggestion sugerencia = sugerenciaRepository.findOne(ident);
 		model.addAttribute("id", id);
@@ -80,7 +66,7 @@ public class MainController {
     
     @RequestMapping(value = "/validarse", method = RequestMethod.POST)
 	public String postUserHtml(@RequestBody String parametros, Model model,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, HttpSession session) {
 
 		String[] parametro = parametros.split("&");
 
@@ -92,16 +78,51 @@ public class MainController {
 
 		if (user != null) {
 			
-			redirectAttributes.addFlashAttribute("user", user);
+			session.setAttribute("citizen", user);
+			session.setAttribute("user", user.getUser());
 			
-			if (user.getUser().isAdmin())
-				return "redirect:/sugerencias";
+			if(user.getUser().isAdmin()){
+				return "intermedioAdmin";
+			}
+			return "intermedioUser";
 			
-			return "redirect:/datos";
 		} else { 
 			//Ciudadano no encontrado
 			redirectAttributes.addFlashAttribute("invalidUser", true);
 			return "redirect:/";
 		}
+	}
+    
+    @RequestMapping(value = "/pasoDashboard", method = RequestMethod.POST)
+    public String pasoDashboard(Model model, HttpSession session){
+    	Citizen user = (Citizen) session.getAttribute("citizen");
+    	if (user.getUser().isAdmin())
+			return "redirect:/sugerencias";
+		
+		return "redirect:/datos";
+    }
+    
+    @RequestMapping(value = "/pasoParticipants", method = RequestMethod.POST)
+    public String pasoParticipants(Model model, HttpSession session){		
+		return "redirect:/datos";
+    }
+    
+    @RequestMapping(value = "/pasoPSystem", method = RequestMethod.POST)
+    public String pasoParticipationSystem(Model model, HttpSession session){
+    	User user = (User) session.getAttribute("user");
+    	List<Suggestion> sugerencias = manageSuggestion.getSuggestions();
+		model.addAttribute("sugerencias", sugerencias);
+		if (user.isAdmin()) {
+			return "listaSugerenciasAdmin";
+		} else {
+			return "listaSugerencias";
+		}
+    }
+    
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public String cerrarSesion(HttpSession session) {
+    	session.setAttribute("citizen", null);
+		session.setAttribute("user", null);
+		return "login";
 	}
 }

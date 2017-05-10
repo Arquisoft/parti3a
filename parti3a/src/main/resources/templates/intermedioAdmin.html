@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Eleccion de módulo</title>
+</head>
+<body>
+	
+	<h1 align="center">Seleccione modulo</h1>
+	<div align="center">
+		<table border="1">
+			
+			<tr>
+				<td>
+					<form th:action="@{/pasoDashboard}" method="POST">
+						<div align="center">
+							 <button id="pasoDashboard" type="submit">Dashboard</button>
+					    </div>
+					</form>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<form th:action="@{/pasoPSystem}" method="POST">
+						<div align="center">
+							 <button id="pasoPSystem" type="submit">Participation System</button>
+					    </div>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

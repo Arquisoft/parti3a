@@ -38,11 +38,11 @@ public class Suggestion implements Serializable {
 	@JsonBackReference(value = "user-suggestions")
 	private User user;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JsonBackReference(value = "category-suggestions")
 	private Category category;	
 	
-	@OneToMany(mappedBy="suggestion", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="suggestion", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JsonManagedReference(value = "suggestion-comments")
 	private Set<Comment> comments = new HashSet<Comment>();
 	
@@ -70,7 +70,15 @@ public class Suggestion implements Serializable {
 	public Suggestion(String contents, Category category, User user) {		
 		this.contents = contents;
 		this.creationDate = new Date();
+		Association.AsignarSugerencia.link(user, this);
+		this.category = category;	
+		this.status = SuggestionStatus.OPEN;
+	}
+	
+	public Suggestion(String contents, User user, Category category) {		
+		this.contents = contents;
 		this.user = user;
+		this.creationDate = new Date();
 		this.category = category;	
 		this.status = SuggestionStatus.OPEN;
 	}
@@ -191,6 +199,16 @@ public class Suggestion implements Serializable {
 	
 	public void setNumComments(int numComments) {
 		this.numComments = numComments;
+	}
+	
+	public void addNegativeVote() {
+		int votes = getNegativeVotes();
+		setNegativeVotes(votes++);
+	}
+	
+	public void addPositiveVote() {
+		int votes = getPositiveVotes();
+		setPositiveVotes(votes++);
 	}
 
 	@Override

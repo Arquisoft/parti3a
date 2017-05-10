@@ -3,6 +3,7 @@ package es.uniovi.asw.business.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaContext;
 import org.springframework.stereotype.Service;
 
 import es.uniovi.asw.business.SuggestionService;
@@ -16,6 +17,9 @@ import es.uniovi.asw.persistence.SuggestionRepository;
 public class SuggestionServiceImpl implements SuggestionService {
 	
 	@Autowired
+	private JpaContext jpaContext;
+	
+	@Autowired
 	private SuggestionRepository suggestionRepository;
 
 	@Override
@@ -25,7 +29,7 @@ public class SuggestionServiceImpl implements SuggestionService {
 
 	@Override
 	public void deleteSuggestion(Suggestion suggestion) {
-		suggestionRepository.delete(suggestion);
+		jpaContext.getEntityManagerByManagedType(Suggestion.class).remove(suggestion);
 	}
 
 	@Override

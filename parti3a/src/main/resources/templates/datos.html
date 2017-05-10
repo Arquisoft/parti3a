@@ -6,17 +6,40 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	  <link rel="stylesheet" href="css/datos_styles.css" />
+	  <link rel="stylesheet" href="datos_styles.css" />
 </head>
 <body>
     <div class="wrapper">
+      <div class="logout-section">
+        <a href="/cerrarSesion">Cerrar sesión</a>
+      </div>
       <div class="datos-area">
         <h2>Sus datos:</h2>
-        <p th:text="'Email: ' + ${email} " />
+        <div th:if="${errorPresent}">
+          <p th:text="${error}" style="color: red;text-align:center;" />
+        </div>
+        <p th:text="'E-mail: ' + ${email}" />
         <p th:text="'Nombre: ' + ${firstName} + ' ' + ${lastName}" />
         <p th:text="'NIF: ' + ${nif} " />
         <p th:text="'Dirección: ' + ${address} " />
         <p th:text="'Nacionalidad: ' + ${nationality} " />
+
+        <hr />
+
+        <h3>Cambiar e-mail:</h3>
+        <form action="/cambiarEmail" method="post">
+          <label for="email">E-mail: </label>
+          <input type="text" class="form-control" th:value="${email}" id="email" name="email" />
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Cambiar e-mail</button>
+        </form>
+        <h3>Cambiar contraseña:</h3>
+        <form action="/cambiarClave" method="post">
+          <label for="password">Contraseña actual: </label>
+          <input type="password" class="form-control" id="password" name="password" /><br />
+          <label for="newpassword">Nueva contraseña: </label>
+          <input type="password" class="form-control" id="newpassword" name="newpassword" />
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Cambiar contraseña</button>
+        </form>
       </div>
     </div>
 </body>

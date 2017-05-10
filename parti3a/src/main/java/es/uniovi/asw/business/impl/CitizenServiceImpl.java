@@ -14,7 +14,7 @@ public class CitizenServiceImpl implements CitizenService{
 
 	@Autowired
 	private CitizenRepository citizenRepository;
-
+	
 	@Override
 	public Citizen addCitizen(Citizen citizen) {
 		return citizenRepository.save(citizen);
@@ -26,7 +26,7 @@ public class CitizenServiceImpl implements CitizenService{
 	}
 
 	@Override
-	public void updateCitizen(Citizen citizen) {
+	public void updateInfo(Citizen citizen) {
 		citizenRepository.save(citizen);
 	}
 
@@ -46,7 +46,7 @@ public class CitizenServiceImpl implements CitizenService{
 	}
 	
 	@Override
-	public Citizen getParticipant(String email, String password) {
+	public Citizen findByEmailAndPassword(String email, String password) {
 		return citizenRepository.findByEmailAndPassword(email, password);
 	}
 }
