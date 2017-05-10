@@ -11,13 +11,13 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import es.uniovi.asw.Application;
+import es.uniovi.asw.ParticipationSystem.SistemaDeParticipacion.ManageComment;
+import es.uniovi.asw.ParticipationSystem.SistemaDeParticipacion.ManageSuggestion;
 import es.uniovi.asw.business.CitizenService;
 import es.uniovi.asw.model.Category;
 import es.uniovi.asw.model.Citizen;
 import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.Suggestion;
-import es.uniovi.asw.participationSystem.SistemaDeParticipacion.ManageComment;
-import es.uniovi.asw.participationSystem.SistemaDeParticipacion.ManageSuggestion;
 import es.uniovi.asw.persistence.SuggestionRepository;
 import es.uniovi.asw.util.Encrypter;
 

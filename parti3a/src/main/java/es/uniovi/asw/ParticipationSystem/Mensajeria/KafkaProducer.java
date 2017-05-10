@@ -1,4 +1,4 @@
-package es.uniovi.asw.participationSystem.Mensajeria;
+package es.uniovi.asw.ParticipationSystem.Mensajeria;
 
 import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.Suggestion;

@@ -1,4 +1,4 @@
-package es.uniovi.asw.participationSystem.DBManagement;
+package es.uniovi.asw.ParticipationSystem.DBManagement;
 
 import java.util.List;
 

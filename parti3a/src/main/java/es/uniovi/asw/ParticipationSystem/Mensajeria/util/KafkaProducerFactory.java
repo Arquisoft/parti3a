@@ -1,4 +1,4 @@
-package es.uniovi.asw.participationSystem.Mensajeria.util;
+package es.uniovi.asw.ParticipationSystem.Mensajeria.util;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;

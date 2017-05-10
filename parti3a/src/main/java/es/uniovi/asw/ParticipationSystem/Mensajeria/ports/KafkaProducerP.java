@@ -1,4 +1,6 @@
-package es.uniovi.asw.participationSystem.Mensajeria.ports;
+package es.uniovi.asw.ParticipationSystem.Mensajeria.ports;
+
+import javax.annotation.ManagedBean;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +13,10 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import es.uniovi.asw.ParticipationSystem.Mensajeria.KafkaProducer;
 import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.Suggestion;
 import es.uniovi.asw.model.SuggestionVote;
-import es.uniovi.asw.participationSystem.Mensajeria.KafkaProducer;
-
-import javax.annotation.ManagedBean;
 
 @ManagedBean
 @Service

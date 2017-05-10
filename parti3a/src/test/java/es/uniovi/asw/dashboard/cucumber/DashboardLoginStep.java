@@ -39,9 +39,11 @@ public class DashboardLoginStep {
 		driver.findElement(By.name("password")).sendKeys(psw);
 	}
 
-	@When("^he pushes the \"Log in\" button$")
+	@When("^he pushes the \"Log in\" button and selects dashboard$")
 	public void pushLogIn() {
 		driver.findElement(By.cssSelector("button[type=submit]")).click();
+		SeleniumUtils.EsperaCargaPagina(driver, "text", "Seleccione módulo", 10);
+		driver.findElement(By.id("pasoDashboard")).click();
 	}
 
 	@And("^he gets redirected to the dashboard view$")

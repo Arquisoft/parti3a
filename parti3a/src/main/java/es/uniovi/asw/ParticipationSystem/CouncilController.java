@@ -1,4 +1,4 @@
-package es.uniovi.asw.participationSystem;
+package es.uniovi.asw.ParticipationSystem;
 
 import java.util.List;
 
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import es.uniovi.asw.ParticipationSystem.SistemaDeParticipacion.ManageComment;
+import es.uniovi.asw.ParticipationSystem.SistemaDeParticipacion.ManageSuggestion;
 import es.uniovi.asw.model.Association;
 import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.RestringedWords;
 import es.uniovi.asw.model.Suggestion;
-import es.uniovi.asw.participationSystem.SistemaDeParticipacion.ManageComment;
-import es.uniovi.asw.participationSystem.SistemaDeParticipacion.ManageSuggestion;
 
 @Controller
 public class CouncilController {

@@ -1,14 +1,14 @@
-package es.uniovi.asw.participationSystem.SistemaDeParticipacion.ports;
+package es.uniovi.asw.ParticipationSystem.SistemaDeParticipacion.ports;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.uniovi.asw.ParticipationSystem.DBManagement.ManageCommentDB;
+import es.uniovi.asw.ParticipationSystem.SistemaDeParticipacion.ManageComment;
 import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.Suggestion;
-import es.uniovi.asw.participationSystem.DBManagement.ManageCommentDB;
-import es.uniovi.asw.participationSystem.SistemaDeParticipacion.ManageComment;
 
 @Service
 public class ManageCommentP implements ManageComment {

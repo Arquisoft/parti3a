@@ -39,9 +39,11 @@ public class ParticipantsLoginStep {
 		driver.findElement(By.name("password")).sendKeys(psw);
 	}
 
-	@When("^pushes the \"Log in\" button$")
+	@When("^pushes the \"Log in\" button and selects participants$")
 	public void pushLogIn() {
 		driver.findElement(By.cssSelector("button[type=submit]")).click();
+		SeleniumUtils.EsperaCargaPagina(driver, "text", "Seleccione módulo", 10);
+		driver.findElement(By.id("pasoParticipants")).click();
 	}
 
 	@And("^he gets redirected to the participants view$")
