@@ -1,6 +1,7 @@
 package es.uniovi.asw;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -24,46 +25,57 @@ public class DataLoader implements ApplicationRunner {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private CitizenService citizenService;
-	
+
 	@Autowired
 	private SuggestionService suggestionService;
-	
+
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		//Creamos usuarios si es que no existían ya
-		Citizen adminCitizen = citizenService.findByEmailAndPassword("admin@me.com", Encrypter.getInstance().makeSHA1Hash("admin"));
-		Citizen participantCitizen = citizenService.findByEmailAndPassword("user1@me.com", Encrypter.getInstance().makeSHA1Hash("user1"));
-		
+		// Creamos usuarios si es que no existían ya
+		Citizen adminCitizen = citizenService.findByEmailAndPassword("admin@me.com",
+				Encrypter.getInstance().makeSHA1Hash("admin"));
+		Citizen participantCitizen = citizenService.findByEmailAndPassword("user1@me.com",
+				Encrypter.getInstance().makeSHA1Hash("user1"));
+
 		if (adminCitizen == null) {
-			Citizen citizen = new Citizen(
-					"Pedro", "Hernández Pérez", "admin@me.com", new Date(), 
-					"Oviedo", "ESP", "12541211B");
+			Citizen citizen = new Citizen("Pedro", "Hernández Pérez", "admin@me.com", new Date(), "Oviedo", "ESP",
+					"12541211B");
 			citizenService.addCitizen(citizen);
-			
+
 			String encryptedPass = Encrypter.getInstance().makeSHA1Hash("admin");
 			User user = new User("admin", encryptedPass, citizen);
 			user.setAdmin(true);
 			userService.addUser(user);
 		}
-		
+
 		if (participantCitizen == null) {
-			Citizen citizen = new Citizen(
-					"Juan", "Rodríguez García", "user1@me.com", new Date(),
-					"Oviedo", "ESP", "14321234Z");
+			Citizen citizen = new Citizen("Juan", "Rodríguez García", "user1@me.com", new Date(), "Oviedo", "ESP",
+					"14321234Z");
 			citizenService.addCitizen(citizen);
-			
+
 			String encryptedPass = Encrypter.getInstance().makeSHA1Hash("user1");
 			User user = new User("user1", encryptedPass, citizen);
-			userService.addUser(user);		
+			userService.addUser(user);
 		}
 
-		User user = userService.findByUsernameAndPassword("user1", Encrypter.getInstance().makeSHA1Hash("user1"));
-		Suggestion sugerencia = new Suggestion("Sugerencia prueba", 
-				new Category("Categoría testing"), 
-				user);
-		suggestionService.addSuggestion(sugerencia);
+		List<Suggestion> suggestions = suggestionService.findAllSuggestions();
+
+		boolean suggestionFound = false;
+
+		for (Suggestion suggestion : suggestions) {
+			if ("Sugerencia prueba".equals(suggestion.getContents())) {
+				suggestionFound = true;
+				break;
+			}
+		}
+
+		if (!suggestionFound) {
+			User user = userService.findByUsernameAndPassword("user1", Encrypter.getInstance().makeSHA1Hash("user1"));
+			Suggestion sugerencia = new Suggestion("Sugerencia prueba", new Category("Categoría testing"), user);
+			suggestionService.addSuggestion(sugerencia);
+		}
 	}
 }

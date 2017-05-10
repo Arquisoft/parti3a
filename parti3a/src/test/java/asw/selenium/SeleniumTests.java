@@ -223,8 +223,12 @@ public class SeleniumTests {
 		driver.findElement(By.id("password")).click();
 		driver.findElement(By.id("password")).sendKeys("user1");
 		
+		driver.findElement(By.id("newpassword")).click();
+		driver.findElement(By.id("newpassword")).clear();
+		
 		driver.findElement(By.id("submitPassword")).click();
-		SeleniumUtils.EsperaCargaPagina(driver, "text", "Nueva contraseña en blanco", 10);
+		System.out.println(driver.getPageSource());
+		SeleniumUtils.EsperaCargaPagina(driver, "text", "Nueva contraseña no debe estar en blanco", 10);
 		//Nueva clave igual a la anterior
 		driver.findElement(By.id("password")).click();
 		driver.findElement(By.id("password")).sendKeys("user1");
