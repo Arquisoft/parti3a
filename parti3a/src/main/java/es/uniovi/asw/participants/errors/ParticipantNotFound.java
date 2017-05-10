@@ -11,6 +11,6 @@ public class ParticipantNotFound extends ErrorInterface {
 
 	@Override
 	public String getStringError() {
-		return "404: Not found";
+		return "Contraseña inválida";
 	}
 }
