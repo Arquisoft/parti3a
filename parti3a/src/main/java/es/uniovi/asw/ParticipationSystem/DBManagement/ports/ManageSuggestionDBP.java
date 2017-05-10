@@ -78,7 +78,6 @@ public class ManageSuggestionDBP implements ManageSuggestionDB {
 
 	@Override
 	public SuggestionVote voteSuggestion(Suggestion suggestion, User user, VoteStatus vote) {
-		System.out.println(vote);
 		return voteService.addSuggestionVote(suggestion, user, vote);
 	}
 
@@ -90,5 +89,14 @@ public class ManageSuggestionDBP implements ManageSuggestionDB {
 	@Override
 	public RestringedWords addRestringedWord(RestringedWords word) {
 		return wordService.addRestringedWord(word);
+	}
+
+	@Override
+	public Suggestion addSuggestionRest(Suggestion suggestion) {
+		Suggestion sugerencia = suggestionService.addSuggestionRest(suggestion);
+		if(sugerencia!=null){
+			producer.sendSugerencia(sugerencia);
+		}
+		return sugerencia;
 	}
 }

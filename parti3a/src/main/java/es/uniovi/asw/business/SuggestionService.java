@@ -14,6 +14,7 @@ public interface SuggestionService {
 	public Suggestion findSuggestion (Long suggestionId);
 	
 	//Otros
+	public Suggestion addSuggestionRest (Suggestion suggestion);
 	public void addVote (Suggestion suggestion, User user, VoteStatus vote);
 	public void deleteByIdSuggestion (Long suggestionId);
 	public List<Suggestion> findAllSuggestions();
