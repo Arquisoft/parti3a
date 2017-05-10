@@ -51,12 +51,13 @@
 			<optional>true</optional>
 		</dependency>
 
+	
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.1.0</version><!--$NO-MVN-MAN-VER$-->
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.4.0</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
