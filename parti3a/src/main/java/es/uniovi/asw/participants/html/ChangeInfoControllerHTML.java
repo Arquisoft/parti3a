@@ -78,11 +78,11 @@ public class ChangeInfoControllerHTML {
 			newPassword = parametro[1].split("=")[1];
 		String email = citizen.getEmail();
 		
-		password = Encrypter.getInstance().makeSHA1Hash(password);
-		newPassword = Encrypter.getInstance().makeSHA1Hash(newPassword);
+		String hashedPassword = Encrypter.getInstance().makeSHA1Hash(password);
+		String hashedNewPassword = Encrypter.getInstance().makeSHA1Hash(newPassword);
 		
 		try {
-			Check.participantExists(email, password, citizenService);
+			Check.participantExists(email, hashedPassword, citizenService);
 			Check.passwordNotEmpty(newPassword);
 			Check.differentPassword(password, newPassword);
 		} catch (ErrorInterface e) {
@@ -91,7 +91,7 @@ public class ChangeInfoControllerHTML {
 			return "redirect:/datos";
 		}
 		//Todo correcto: cambiamos su password y recargamos la página
-		citizen.getUser().setPassword(newPassword);
+		citizen.getUser().setPassword(hashedNewPassword);
 		citizenService.updateInfo(citizen);
 		
 		return "redirect:/datos";
