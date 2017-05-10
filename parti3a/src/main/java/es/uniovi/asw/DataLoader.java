@@ -80,7 +80,7 @@ public class DataLoader implements ApplicationRunner {
 			User user = userService.findByUsernameAndPassword("user1", Encrypter.getInstance().makeSHA1Hash("user1"));
 			Category category = new Category("Categoría testing");
 			categoryService.addCategory(category);
-			Suggestion sugerencia = new Suggestion("Sugerencia prueba", category, user);
+			Suggestion sugerencia = new Suggestion("Sugerencia prueba", user, category);
 			suggestionService.addSuggestion(sugerencia);
 		}
 	}
