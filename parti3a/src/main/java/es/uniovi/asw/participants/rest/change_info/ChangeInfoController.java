@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.uniovi.asw.business.CitizenService;
 import es.uniovi.asw.model.Citizen;
+import es.uniovi.asw.participants.errors.BadRequestError;
 import es.uniovi.asw.participants.errors.ErrorInterface;
 import es.uniovi.asw.util.Check;
 import es.uniovi.asw.util.Encrypter;
@@ -71,12 +72,14 @@ public class ChangeInfoController implements ChangeInfo {
 		String password = form.getPassword();
 		String newPassword = form.getNewPassword();
 		
+		Check.passwordNotEmpty(newPassword);
+		Check.differentPassword(password, newPassword);
+		
 		password = Encrypter.getInstance().makeSHA1Hash(password);
 		newPassword = Encrypter.getInstance().makeSHA1Hash(newPassword);
 		
+		Check.passwordNotEmpty(newPassword);		
 		Check.participantExists(email, password, citizenService);
-		Check.passwordNotEmpty(newPassword);
-		Check.differentPassword(password, newPassword);
 		
 		//Si todo es correcto, cambiamos la clave y retornamos la respuesta
 		Citizen citizen = citizenService.findByEmailAndPassword(email, password);
@@ -87,9 +90,15 @@ public class ChangeInfoController implements ChangeInfo {
 				"Contraseña cambiada correctamente"));
 	}
 
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(ErrorInterface.class)
-	public String handleBadRequest(ErrorInterface error) {
+	public String handleErrorResponseNotFound(ErrorInterface error) {
+	    return error.getJSONError();
+	} 
+	
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(BadRequestError.class)
+	public String handleErrorResponseBadRequest(ErrorInterface error) {
 	    return error.getJSONError();
 	} 
 }

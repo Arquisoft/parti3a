@@ -6,11 +6,11 @@ public class PasswordEmptyException extends BadRequestError {
 
 	@Override
 	public String getJSONError() {
-		return "{\"reason\": \"Nueva contraseña en blanco\"}";
+		return "{\"reason\": \"Nueva contraseña no debe estar en blanco\"}";
 	}
 
 	@Override
 	public String getStringError() {
-		return "Nueva contraseña en blanco";
+		return "Nueva contraseña no debe estar en blanco";
 	}
 }
