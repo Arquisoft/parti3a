@@ -28,7 +28,7 @@ public class GetParticipantInfoControllerHTML {
 	public String getLoginHtml(Model model, HttpSession session) {
 		Citizen citizen = (Citizen) session.getAttribute("citizen");
     	if (citizen != null && citizen.getUser() != null) {
-    		return citizen.getUser().isAdmin() ? "redirect:/sugerencias" : "redirect:/datos";
+    		return citizen.getUser().isAdmin() ? "intermedioAdmin" : "intermedioUser";
     	}
 		return "login";
 	}
