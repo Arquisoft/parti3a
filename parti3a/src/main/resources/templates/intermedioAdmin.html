@@ -7,9 +7,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="login_styles.css" />
+<style>
+.logout-section {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+</style>
 </head>
 <body>
 	<div class="wrapper">
+		<div class="logout-section">
+			<a href="/cerrarSesion">Cerrar sesión</a>
+		</div>
 		<div class="form-signin">
 				<h2>Seleccione módulo</h2>
 					<form th:action="@{/pasoDashboard}" method="POST">
