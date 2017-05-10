@@ -41,7 +41,7 @@ public class Check {
 	}
 	
 	public static void passwordNotEmpty(String password) {
-		if (password.trim().isEmpty())
+		if (password == null || password.trim().isEmpty())
 			throw new PasswordEmptyException();
 	}
 	

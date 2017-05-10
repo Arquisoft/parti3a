@@ -313,5 +313,6 @@ class ParticipationSystem extends Simulation {
 			.get("/bourbon")
 			.check(status.is(404))))
 
-	setUp(scn.inject(rampUsers(10000))).protocols(httpProtocol)
+	setUp(scn.inject(rampUsers(1000) over(1000 seconds))).protocols(httpProtocol)
+
 }

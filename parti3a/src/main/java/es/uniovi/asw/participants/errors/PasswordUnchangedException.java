@@ -6,11 +6,12 @@ public class PasswordUnchangedException extends BadRequestError {
 
 	@Override
 	public String getJSONError() {
-		return "{\"reason\": \"La nueva contraseña debe ser diferente\"}";
+		return "{\"reason\": \"La nueva contraseña debe ser "
+				+ "diferente a la anterior\"}";
 	}
 
 	@Override
 	public String getStringError() {
-		return "La nueva contraseña debe ser diferente";
+		return "La nueva contraseña debe ser diferente a la anterior";
 	}
 }

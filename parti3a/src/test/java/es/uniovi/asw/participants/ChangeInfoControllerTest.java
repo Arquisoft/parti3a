@@ -184,7 +184,8 @@ public class ChangeInfoControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, restResponse.getStatusCode());	
 
 		//Checking that the message in the response is the right one
-		String error = "{\"reason\": \"La nueva contraseña debe ser diferente\"}";
+		String error = "{\"reason\": \"La nueva contraseña debe ser "
+				+ "diferente a la anterior\"}";
 		assertEquals(error, restResponse.getBody());	
 	}
 
@@ -206,7 +207,8 @@ public class ChangeInfoControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, restResponse.getStatusCode());	
 
 		//Checking that the message in the response is the right one
-		String error = "{\"reason\": \"Nueva contraseña en blanco\"}";
+		String error = "{\"reason\": "
+				+ "\"Nueva contraseña no debe estar en blanco\"}";
 		assertEquals(error, restResponse.getBody());	
 	}
 }

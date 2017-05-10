@@ -72,12 +72,14 @@ public class ChangeInfoController implements ChangeInfo {
 		String password = form.getPassword();
 		String newPassword = form.getNewPassword();
 		
-		Check.participantExists(email, password, citizenService);
 		Check.passwordNotEmpty(newPassword);
 		Check.differentPassword(password, newPassword);
 		
 		password = Encrypter.getInstance().makeSHA1Hash(password);
 		newPassword = Encrypter.getInstance().makeSHA1Hash(newPassword);
+		
+		Check.passwordNotEmpty(newPassword);		
+		Check.participantExists(email, password, citizenService);
 		
 		//Si todo es correcto, cambiamos la clave y retornamos la respuesta
 		Citizen citizen = citizenService.findByEmailAndPassword(email, password);
