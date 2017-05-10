@@ -46,9 +46,14 @@ public class ChangeInfoControllerHTML {
 		String newEmail = parametro[0].split("=")[1].replace("%40", "@");
 		String email = citizen.getEmail();
 		
-		Check.validEmailFormat(newEmail);
-		Check.differentEmail(email, newEmail);
-		
+		try {
+			Check.validEmailFormat(newEmail);
+			Check.differentEmail(email, newEmail);
+		} catch (BadRequestError e) {
+			redirectAttributes.addFlashAttribute("errorPresent", true);
+			redirectAttributes.addFlashAttribute("error", e.getStringError());
+			return "redirect:/datos";
+		}
 		//Todo correcto: cambiamos su e-mail y recargamos la página
 		citizen.setEmail(newEmail);
 		citizenService.updateInfo(citizen);
@@ -67,18 +72,26 @@ public class ChangeInfoControllerHTML {
 		String[] parametro = parametros.split("&");
 
 		String password = parametro[0].split("=")[1];
-		String newPassword = parametro[1].split("=")[1];
+		String newPassword = "";
+		
+		if (parametro[1].split("=").length >= 2)
+			newPassword = parametro[1].split("=")[1];
 		String email = citizen.getEmail();
 		
-		password = Encrypter.getInstance().makeSHA1Hash(password);
-		newPassword = Encrypter.getInstance().makeSHA1Hash(newPassword);
+		String hashedPassword = Encrypter.getInstance().makeSHA1Hash(password);
+		String hashedNewPassword = Encrypter.getInstance().makeSHA1Hash(newPassword);
 		
-		Check.participantExists(email, password, citizenService);
-		Check.passwordNotEmpty(newPassword);
-		Check.differentPassword(password, newPassword);
-		
+		try {
+			Check.participantExists(email, hashedPassword, citizenService);
+			Check.passwordNotEmpty(newPassword);
+			Check.differentPassword(password, newPassword);
+		} catch (ErrorInterface e) {
+			redirectAttributes.addFlashAttribute("errorPresent", true);
+			redirectAttributes.addFlashAttribute("error", e.getStringError());
+			return "redirect:/datos";
+		}
 		//Todo correcto: cambiamos su password y recargamos la página
-		citizen.getUser().setPassword(newPassword);
+		citizen.getUser().setPassword(hashedNewPassword);
 		citizenService.updateInfo(citizen);
 		
 		return "redirect:/datos";
@@ -86,9 +99,9 @@ public class ChangeInfoControllerHTML {
 	
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(BadRequestError.class)
-	public String handleErrorResponseNotFound(ErrorInterface excep, RedirectAttributes attrs) {
-		attrs.addFlashAttribute("error", excep.getStringError());
-		attrs.addFlashAttribute("errorPresent", true);
+	public String handleErrorResponseBadRequest(ErrorInterface excep, Model model) {
+		model.addAttribute("error", excep.getStringError());
+		
 		return "error";
 	}
 	
