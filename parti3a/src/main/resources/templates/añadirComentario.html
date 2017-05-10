@@ -2,22 +2,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Anadir Comentario</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="login_styles.css" />
 </head>
 	<body>
-		<h1>Nueva comentario</h1>
-		<form th:action="@{/anadirComentario}" method="POST">
-			<div>
-				<table border="1">
-					<tr>
-				    	<td align="center"><label for="contenido">Contenido: </label></td>
-				    	<td align="center"><input type="text" id="contenido" name="contenido"/></td>
-				    </tr>
-				    <tr>
-				    	<td/>
-				    	<td align="center"><button id="nuevaSugerencia" type="submit">Nuevo comentario</button></td>
-				    </tr>
-			    </table>
-		    </div>
-		</form>
+		<div class="wrapper">
+			<div class="form-signin">
+				<h2>Nuevo comentario</h2>
+				<form th:action="@{/anadirComentario}" method="POST">
+									<label for="contenido">Contenido: </label>
+						    	<input class="form-control" type="text" id="contenido" name="contenido"/><br />
+
+						    <button class="btn btn-lg btn-primary btn-block" id="nuevaSugerencia" type="submit">Nuevo comentario</button>
+				</form>
+			</div>
+		</div>
 	</body>
 </html>

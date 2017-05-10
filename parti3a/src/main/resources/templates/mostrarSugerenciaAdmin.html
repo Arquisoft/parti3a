@@ -2,17 +2,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Mostrar Sugerencia</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div>
-		<form th:action="@{/listarSugerenciasAdmin}" method="POST"> 
-					<button id="listar" type="submit" name="listar">Lista de sugerencias</button>
+		<form th:action="@{/listarSugerenciasAdmin}" method="POST">
+					<button class="btn btn-primary" id="listar" type="submit" name="listar">Lista de sugerencias</button>
 		</form>
 	</div>
 
 	<h1>Sugerencia seleccionada</h1>
 	<div>
-		<table border="1">
+		<table border="1" class="table table-hover">
 			<tr>
 				<th>Contenido</th>
 				<th></th>
@@ -20,40 +23,40 @@
 				<th>Apoyos</th>
 				<th>Rechazos</th>
 			</tr>
-			<tr>	
+			<tr>
 		        <td th:text="${seleccionada.contents}" align="center"/>
 		        <td/>
 		        <td th:text="${seleccionada.user.username}" align="center"/>
 		        <td th:text="${seleccionada.getPositiveVotes()}" align="center"/>
-		        <td th:text="${seleccionada.getNegativeVotes()}" align="center"/>   
+		        <td th:text="${seleccionada.getNegativeVotes()}" align="center"/>
 			</tr>
 		</table>
 	</div>
-	
+
 	<div th:id="comentarios">
 		<h2>Comentarios</h2>
-			<form th:action="@{/ordenarPorFechaAdmin}" method="POST"> 
-					<button id="ordenarDate" type="submit" name="ordenarDate">Ordenar por fecha</button>
+			<form th:action="@{/ordenarPorFechaAdmin}" method="POST">
+					<button class="btn btn-primary" id="ordenarDate" type="submit" name="ordenarDate">Ordenar por fecha</button>
 			</form>
-			<table border="1">
+			<table border="1" class="table table-hover">
 				<tr>
 					<th>Contenido</th>
 					<th></th>
 					<th>Usuario</th>
 				</tr>
-				<tr th:each="c : ${comentarios}">	
+				<tr th:each="c : ${comentarios}">
 			                  <td th:text="${c.contents}" align="center"/>
 			                  <td></td>
 		       				  <td th:text="${c.user.username}" align="center"/>
 		       				  <td></td>
 		       				  <td align="center">
 			       				  <form th:action="@{/eliminarComentario(comentario=${c.id})}" method="POST">
-			       				  	<button id="ver" type="submit" name="ver" th:value="${c.contents}">
+			       				  	<button class="btn btn-primary" id="ver" type="submit" name="ver" th:value="${c.contents}">
 			       				  	Eliminar
 			       				  	</button>
-			       				 
+
 			       				  </form>
-		       				  </td> 
+		       				  </td>
 				</tr>
 			</table>
 		</div>

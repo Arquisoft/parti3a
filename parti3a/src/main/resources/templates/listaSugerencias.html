@@ -2,41 +2,44 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Lista de sugerencias</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div>
-		<form th:action="@{/logout}" method="POST"> 
-					<button id="logout" type="submit" name="logout">Cerrar sesion</button>
+		<form th:action="@{/logout}" method="POST">
+					<button class="btn btn-primary" id="logout" type="submit" name="logout">Cerrar sesion</button>
 		</form>
 	</div>
-	
+
 	<div>
-		<form th:action="@{/nuevaSugerencia}" method="POST"> 
-					<button id="nueva" type="submit" name="nueva">Nueva sugerencia</button>
-		</form>	
+		<form th:action="@{/nuevaSugerencia}" method="POST">
+					<button class="btn btn-primary" id="nueva" type="submit" name="nueva">Nueva sugerencia</button>
+		</form>
 	</div>
-	
+
 	<div th:id="todas">
-			<table border="1">
+			<table border="1" class="table table-hover">
 				<tr>
 					<th>Contenido</th>
 					<th></th>
 					<th>Usuario</th>
 					<th></th>
 				</tr>
-				<tr th:each="s : ${sugerencias}">	
+				<tr th:each="s : ${sugerencias}">
 			                  <td th:text="${s.contents}" align="center"/>
 			                  <td></td>
-			                  <td th:text="${s.user.username}" align="center"/> 
+			                  <td th:text="${s.user.username}" align="center"/>
 		       				  <td></td>
 		       				  <td align="center">
 			       				  <form th:action="@{/mostrar(sugerencia=${s.id})}" method="POST">
 			       				  	<button id="ver" type="submit" name="ver" th:value="${s.contents}">
 			       				  	Mostrar
 			       				  	</button>
-			       				 
+
 			       				  </form>
-		       				  </td> 
+		       				  </td>
 				</tr>
 			</table>
 </div>

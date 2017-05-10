@@ -2,16 +2,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Mostrar Sugerencia</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div>
-		<form th:action="@{/listarSugerencias}" method="POST"> 
-					<button id="listar" type="submit" name="listar">Lista de sugerencias</button>
+		<form th:action="@{/listarSugerencias}" method="POST">
+					<button class="btn btn-primary" id="listar" type="submit" name="listar">Lista de sugerencias</button>
 		</form>
 	</div>
 	<h1>Sugerencia seleccionada</h1>
 	<div>
-		<table border="1">
+		<table border="1" class="table table-hover">
 			<tr>
 				<th>Contenido</th>
 				<th></th>
@@ -19,46 +22,46 @@
 				<th>Apoyos</th>
 				<th>Rechazos</th>
 			</tr>
-			<tr>	
+			<tr>
 		        <td th:text="${seleccionada.contents}" align="center"/>
 		        <td/>
 		        <td th:text="${seleccionada.user.username}" align="center"/>
 		        <td th:text="${seleccionada.getPositiveVotes()}" align="center"/>
-		        <td th:text="${seleccionada.getNegativeVotes()}" align="center"/>    				 
+		        <td th:text="${seleccionada.getNegativeVotes()}" align="center"/>
 			</tr>
 			<tr>
 				<td/><td/><td/>
 				<td align="center">
     				<form th:action="@{/votarSugerencia(voto=${positivo})}" method="POST">
-    					<button id="mas" type="submit" name="mas" th:value="${seleccionada.contents}">+</button>
+    					<button class="btn btn-primary" id="mas" type="submit" name="mas" th:value="${seleccionada.contents}">+</button>
     				</form>
-    		    </td> 
+    		    </td>
       			<td align="center">
       				<form th:action="@{/votarSugerencia(voto=${negativo})}" method="POST">
-      					<button id="menos" type="submit" name="menos" th:value="${seleccionada.contents}">-</button>
+      					<button class="btn btn-primary" id="menos" type="submit" name="menos" th:value="${seleccionada.contents}">-</button>
       				</form>
-      			</td> 
-			</tr> 
+      			</td>
+			</tr>
 		</table>
 	</div>
 	<div>
-		<form th:action="@{/nuevoComentario(sugerencia=${seleccionada.id})}" method="POST"> 
-					<button id="nuevoComentario" type="submit" name="nuevoComentario">Nuevo comentario</button>
+		<form th:action="@{/nuevoComentario(sugerencia=${seleccionada.id})}" method="POST">
+					<button class="btn btn-primary" id="nuevoComentario" type="submit" name="nuevoComentario">Nuevo comentario</button>
 		</form>
 	</div>
-	
+
 	<div th:id="comentarios">
 		<h2>Comentarios</h2>
-			<form th:action="@{/ordenarPorFecha}" method="POST"> 
-					<button id="ordenarDate" type="submit" name="ordenarDate">Ordenar por fecha</button>
+			<form th:action="@{/ordenarPorFecha}" method="POST">
+					<button class="btn btn-primary" id="ordenarDate" type="submit" name="ordenarDate">Ordenar por fecha</button>
 			</form>
-			<table border="1">
+			<table border="1" class="table table-hover">
 				<tr>
 					<th>Contenido</th>
 					<th></th>
 					<th>Usuario</th>
 				</tr>
-				<tr th:each="c : ${comentarios}">	
+				<tr th:each="c : ${comentarios}">
 			        <td th:text="${c.contents}" align="center"/>
 			        <td></td>
 		       		<td th:text="${c.user.username}" align="center"/>
