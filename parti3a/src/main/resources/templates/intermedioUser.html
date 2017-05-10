@@ -1,33 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Eleccion de modulo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Elección de modulo</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="login_styles.css" />
 </head>
-<body>	
-	<h1 align="center">Seleccione módulo</h1>
-	<div align="center">
-		<table border="1">
-			
-			<tr>
-				<td>
+<body>
+	<div class="wrapper">
+		<div class="form-signin">
+				<h2>Seleccione módulo</h1>
 					<form th:action="@{/pasoParticipants}" method="POST">
 						<div align="center">
-							 <button id="pasoParticipants" type="submit">Participants</button>
+							 <button style="margin-bottom: 10px;" class="btn btn-lg btn-primary btn-block" id="pasoParticipants" type="submit">Participants</button>
 					    </div>
 					</form>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>
 					<form th:action="@{/pasoPSystem}" method="POST">
 						<div align="center">
-							 <button id="pasoPSystem" type="submit">Participation System</button>
+							 <button style="margin-bottom: 10px;" class="btn btn-lg btn-primary btn-block" id="pasoPSystem" type="submit">Participation System</button>
 					    </div>
 					</form>
-				</td>
-			</tr>
-		</table>
+		</div>
 	</div>
 </body>
 </html>
