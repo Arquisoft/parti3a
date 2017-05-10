@@ -1,10 +1,12 @@
 package es.uniovi.asw.dashboard;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import es.uniovi.asw.persistence.CommentRepository;
 import es.uniovi.asw.persistence.SuggestionRepository;
 
+@Service
 public class QueryInfoImpl implements QueryInfo {
 
 	@Autowired

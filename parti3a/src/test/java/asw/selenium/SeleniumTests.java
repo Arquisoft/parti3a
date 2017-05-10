@@ -363,8 +363,6 @@ public class SeleniumTests {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		SeleniumUtils.textoPresentePagina(driver, "Sugerencia testing");
 	}
 
 	@Test

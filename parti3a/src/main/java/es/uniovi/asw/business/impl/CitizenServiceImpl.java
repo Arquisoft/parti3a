@@ -2,15 +2,20 @@ package es.uniovi.asw.business.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaContext;
 import org.springframework.stereotype.Service;
 
 import es.uniovi.asw.business.CitizenService;
 import es.uniovi.asw.model.Citizen;
+import es.uniovi.asw.model.User;
 import es.uniovi.asw.persistence.CitizenRepository;
 import es.uniovi.asw.persistence.UserRepository;
 
 @Service
+@Transactional
 public class CitizenServiceImpl implements CitizenService{
 
 	@Autowired
@@ -18,6 +23,9 @@ public class CitizenServiceImpl implements CitizenService{
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private JpaContext jpaContext;
 	
 	@Override
 	public Citizen addCitizen(Citizen citizen) {
@@ -31,7 +39,9 @@ public class CitizenServiceImpl implements CitizenService{
 
 	@Override
 	public void updateInfo(Citizen citizen) {
-		userRepository.save(citizen.getUser());
+		User user = citizen.getUser();
+		user = jpaContext.getEntityManagerByManagedType(user.getClass()).merge(user);
+		userRepository.save(user);
 		citizenRepository.save(citizen);
 	}
 
