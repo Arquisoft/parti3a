@@ -1,5 +1,7 @@
 package es.uniovi.asw.dashboard;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import es.uniovi.asw.ParticipationSystem.SistemaDeParticipacion.ManageSuggestion;
 import es.uniovi.asw.model.Citizen;
 import es.uniovi.asw.model.Suggestion;
+import es.uniovi.asw.model.User;
 import es.uniovi.asw.persistence.CitizenRepository;
 import es.uniovi.asw.persistence.CommentRepository;
 import es.uniovi.asw.persistence.SuggestionRepository;
@@ -30,6 +34,9 @@ public class MainController {
     
     @Autowired
     private CitizenRepository repository;
+    
+    @Autowired
+    private ManageSuggestion manageSuggestion;
 
     @RequestMapping("/sugerencias")
     public String vistaSugerencias(Model model, HttpSession session) {
@@ -72,15 +79,41 @@ public class MainController {
 		if (user != null) {
 			
 			session.setAttribute("citizen", user);
+			session.setAttribute("user", user.getUser());
 			
-			if (user.getUser().isAdmin())
-				return "redirect:/sugerencias";
-			
-			return "redirect:/datos";
+			return "intermedio";
 		} else { 
 			//Ciudadano no encontrado
 			redirectAttributes.addFlashAttribute("invalidUser", true);
 			return "redirect:/";
 		}
+	}
+    
+    @RequestMapping(value = "/pasoDashboard", method = RequestMethod.POST)
+    public String pasoDashboard(Model model, HttpSession session){
+    	Citizen user = (Citizen) session.getAttribute("citizen");
+    	if (user.getUser().isAdmin())
+			return "redirect:/sugerencias";
+		
+		return "redirect:/datos";
+    }
+    
+    @RequestMapping(value = "/pasoPSystem", method = RequestMethod.POST)
+    public String pasoParticipationSystem(Model model, HttpSession session){
+    	User user = (User) session.getAttribute("user");
+    	List<Suggestion> sugerencias = manageSuggestion.getSuggestions();
+		model.addAttribute("sugerencias", sugerencias);
+		if (user.isAdmin()) {
+			return "listaSugerenciasAdmin";
+		} else {
+			return "listaSugerencias";
+		}
+    }
+    
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public String cerrarSesion(HttpSession session) {
+    	session.setAttribute("citizen", null);
+		session.setAttribute("user", null);
+		return "login";
 	}
 }

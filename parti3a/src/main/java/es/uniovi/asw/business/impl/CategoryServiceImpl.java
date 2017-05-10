@@ -1,5 +1,7 @@
 package es.uniovi.asw.business.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import es.uniovi.asw.business.CategoryService;
@@ -30,6 +32,11 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public Category findCategory(Long categoryId) {
 		return categoryRepository.findOne(categoryId);
+	}
+
+	@Override
+	public List<Category> findAllCategories() {
+		return categoryRepository.findAll();
 	}
 	
 }

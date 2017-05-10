@@ -1,0 +1,63 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Lista de sugerencias</title>
+</head>
+<body>
+	<div>
+		<form th:action="@{/logout}" method="POST"> 
+					<button id="logout" type="submit" name="logout">Cerrar sesion</button>
+		</form>
+	</div>
+	
+	<h2>Nueva palabra prohibida</h2>
+	<form th:action="@{/anadirPalabra}" method="POST">
+		<div>
+			<table border="1">
+				<tr>
+				    <td><label for="palabra">Palabra: </label></td>
+				    <td><input type="text" id="palabra" name="palabra"/></td>
+			    </tr>
+			    <tr>
+			    	<td/>
+			    	<td align="center"><button id="nuevaPalabra" type="submit">Añadir</button></td>
+			    </tr>
+		    </table>
+	    </div>
+	</form>
+	
+	<h2>Sugerencias recibidas</h2>
+	<div th:id="todas">
+			<table border="1">
+				<tr>
+					<th>Contenido</th>
+					<th></th>
+					<th>Usuario</th>
+					<th></th>
+				</tr>
+				<tr th:each="s : ${sugerencias}">	
+			                  <td th:text="${s.contents}" align="center"/>
+			                  <td></td>
+			                  <td th:text="${s.user.username}" align="center"/> 
+		       				  <td></td>
+		       				  <td align="center">
+			       				  <form th:action="@{/mostrarAdmin(sugerencia=${s.id})}" method="POST">
+			       				  	<button id="ver" type="submit" name="ver" th:value="${s.contents}">
+			       				  	Mostrar
+			       				  	</button>
+			       				 
+			       				  </form>
+		       				  </td> 
+		       				  <td align="center">
+			       				  <form th:action="@{/eliminarSugerencia(sugerencia=${s.id})}" method="POST">
+			       				  	<button id="eliminar" type="submit" name="eliminar" th:value="${s.contents}">
+			       				  	Eliminar
+			       				  	</button>
+			       				 
+			       				  </form>
+		       				  </td> 
+				</tr>
+			</table>
+</div>
+</body>
+</html>
