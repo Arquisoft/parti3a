@@ -9,6 +9,13 @@
 
 Proyecto conjunto del sistema de participación ciudadana
 
+
+Para realizar la ejecución de la aplicación hay que ir a https://parti3a.herokuapp.com y rellenar los datos que nos pide (email y contraseña proporcionados más abajo dependiendo de con que usuario queramos entrar) 
+
+Existen dos usuarios:
+  - Usuario administrador: admin@me.com // admin
+  - Usuario normal: user1@me.com // user1
+
 # Authors
 
 - Herminio García González (@herminiogg)
