@@ -10,8 +10,11 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import es.uniovi.asw.business.CitizenService;
+import es.uniovi.asw.business.SuggestionService;
 import es.uniovi.asw.business.UserService;
+import es.uniovi.asw.model.Category;
 import es.uniovi.asw.model.Citizen;
+import es.uniovi.asw.model.Suggestion;
 import es.uniovi.asw.model.User;
 import es.uniovi.asw.util.Encrypter;
 
@@ -24,6 +27,9 @@ public class DataLoader implements ApplicationRunner {
 	
 	@Autowired
 	private CitizenService citizenService;
+	
+	@Autowired
+	private SuggestionService suggestionService;
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -53,5 +59,11 @@ public class DataLoader implements ApplicationRunner {
 			User user = new User("user1", encryptedPass, citizen);
 			userService.addUser(user);		
 		}
+
+		User user = userService.findByUsernameAndPassword("user1", Encrypter.getInstance().makeSHA1Hash("user1"));
+		Suggestion sugerencia = new Suggestion("Sugerencia prueba", 
+				new Category("Categoría testing"), 
+				user);
+		suggestionService.addSuggestion(sugerencia);
 	}
 }
