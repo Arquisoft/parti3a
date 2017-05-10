@@ -97,8 +97,9 @@ public class ChangeInfoControllerHTML {
 		return "redirect:/datos";
 	}
 	
-	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	
 	@ExceptionHandler(BadRequestError.class)
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	public String handleErrorResponseBadRequest(ErrorInterface excep, Model model) {
 		model.addAttribute("error", excep.getStringError());
 		

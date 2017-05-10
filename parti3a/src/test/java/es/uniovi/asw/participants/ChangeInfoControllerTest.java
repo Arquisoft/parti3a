@@ -1,4 +1,4 @@
-package asw.participants;
+package es.uniovi.asw.participants;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,8 +22,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import es.uniovi.asw.Application;
 import es.uniovi.asw.business.CitizenService;
-import es.uniovi.asw.model.Citizen;
-import es.uniovi.asw.model.User;
 import es.uniovi.asw.participants.rest.change_info.ChangeEmailRequest;
 import es.uniovi.asw.participants.rest.change_info.ChangeEmailResponse;
 import es.uniovi.asw.participants.rest.change_info.ChangePasswordRequest;
@@ -73,13 +71,6 @@ public class ChangeInfoControllerTest {
 		ChangeEmailResponse response = restResponse.getBody();
 		assertEquals("E-mail cambiado a user@me.com", response.getMessage());
 
-		/*//Checking that the email is actually changed in the DB
-		Citizen user1 = service.findByEmailAndPassword("user@me.com", "user1");
-		assertEquals("Juan", user1.getName());
-		assertEquals("Rodríguez García", user1.getSurname());
-		assertEquals(0, user1.getAge());
-		assertEquals("user@me.com", user1.getEmail());*/
-
 		//Reversing the changes
 		request = new ChangeEmailRequest("user@me.com", "user1", "user1@me.com");
 
@@ -93,13 +84,6 @@ public class ChangeInfoControllerTest {
 		//Getting the body of the response (which contains the message)		
 		response = restResponse.getBody();
 		assertEquals("E-mail cambiado a user1@me.com", response.getMessage());
-
-	/*	//Checking that the email is actually changed in the DB
-		user1 = service.findByEmailAndPassword("user1@me.com", "user1");
-		assertEquals("Juan", user1.getName());
-		assertEquals("Rodríguez García", user1.getSurname());
-		assertEquals(0, user1.getAge());
-		assertEquals("user1@me.com", user1.getEmail());*/
 	}
 
 	@Test
@@ -167,11 +151,6 @@ public class ChangeInfoControllerTest {
 		ChangePasswordResponse response = restResponse.getBody();
 		assertEquals("Contraseña cambiada correctamente", response.getMessage());
 
-		//Checking that the password is actually changed in the DB
-	/*	Citizen citizen = service.findByEmailAndPassword("user1@me.com", "aaa");
-		User user = citizen.getUser();
-		assertEquals("aaa", user.getPassword());*/
-
 		//Reversing the changes
 		request = new ChangePasswordRequest("user1@me.com", "aaa", "user1");
 
@@ -185,11 +164,6 @@ public class ChangeInfoControllerTest {
 		//Getting the body of the response (which contains the message)		
 		response = restResponse.getBody();
 		assertEquals("Contraseña cambiada correctamente", response.getMessage());
-
-		//Checking that the password is actually changed in the DB
-	/*	citizen = service.findByEmailAndPassword("user1@me.com", "user1");
-		user = citizen.getUser();
-		assertEquals("user1", user.getPassword());	*/
 	}
 
 	@Test
