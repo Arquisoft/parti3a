@@ -1,19 +1,18 @@
-package es.uniovi.asw.ParticipationSystem.DBManagement.Impl;
+package es.uniovi.asw.participationSystem.DBManagement.ports;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.uniovi.asw.ParticipationSystem.DBManagement.ManageCommentDB;
-import es.uniovi.asw.ParticipationSystem.Mensajeria.KafkaProducer;
 import es.uniovi.asw.business.CommentService;
 import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.Suggestion;
-
+import es.uniovi.asw.participationSystem.DBManagement.ManageCommentDB;
+import es.uniovi.asw.participationSystem.Mensajeria.KafkaProducer;
 
 @Service
-public class ManageCommentDBImpl implements ManageCommentDB {
+public class ManageCommentDBP implements ManageCommentDB {
 	
 	@Autowired
 	private KafkaProducer producer;

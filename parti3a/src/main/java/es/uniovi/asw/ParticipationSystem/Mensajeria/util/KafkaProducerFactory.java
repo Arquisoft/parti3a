@@ -1,4 +1,4 @@
-package es.uniovi.asw.ParticipationSystem.Mensajeria.Util;
+package es.uniovi.asw.participationSystem.Mensajeria.util;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -12,9 +12,6 @@ import org.springframework.kafka.core.ProducerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by herminio on 26/12/16.
- */
 @Configuration
 @EnableKafka
 public class KafkaProducerFactory {

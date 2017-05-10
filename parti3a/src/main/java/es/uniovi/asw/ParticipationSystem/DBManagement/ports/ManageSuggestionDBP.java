@@ -1,12 +1,10 @@
-package es.uniovi.asw.ParticipationSystem.DBManagement.Impl;
+package es.uniovi.asw.participationSystem.DBManagement.ports;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.uniovi.asw.ParticipationSystem.DBManagement.ManageSuggestionDB;
-import es.uniovi.asw.ParticipationSystem.Mensajeria.KafkaProducer;
 import es.uniovi.asw.business.CategoryService;
 import es.uniovi.asw.business.RestringedWordsService;
 import es.uniovi.asw.business.SuggestionService;
@@ -17,10 +15,12 @@ import es.uniovi.asw.model.Suggestion;
 import es.uniovi.asw.model.SuggestionVote;
 import es.uniovi.asw.model.User;
 import es.uniovi.asw.model.types.VoteStatus;
+import es.uniovi.asw.participationSystem.DBManagement.ManageSuggestionDB;
+import es.uniovi.asw.participationSystem.Mensajeria.KafkaProducer;
 
 
 @Service
-public class ManageSuggestionDBImpl implements ManageSuggestionDB {
+public class ManageSuggestionDBP implements ManageSuggestionDB {
 	
 	@Autowired
 	private KafkaProducer producer;

@@ -1,4 +1,4 @@
-package es.uniovi.asw.ParticipationSystem;
+package es.uniovi.asw.participationSystem;
 
 import java.util.List;
 
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import es.uniovi.asw.ParticipationSystem.SistemaDeParticipacion.ManageComment;
-import es.uniovi.asw.ParticipationSystem.SistemaDeParticipacion.ManageSuggestion;
 import es.uniovi.asw.model.Category;
 import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.RestringedWords;
@@ -20,6 +18,8 @@ import es.uniovi.asw.model.Suggestion;
 import es.uniovi.asw.model.SuggestionVote;
 import es.uniovi.asw.model.User;
 import es.uniovi.asw.model.types.VoteStatus;
+import es.uniovi.asw.participationSystem.SistemaDeParticipacion.ManageComment;
+import es.uniovi.asw.participationSystem.SistemaDeParticipacion.ManageSuggestion;
 
 @Controller
 public class UserController {

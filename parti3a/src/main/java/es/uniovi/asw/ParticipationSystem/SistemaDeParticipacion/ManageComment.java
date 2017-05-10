@@ -1,4 +1,4 @@
-package es.uniovi.asw.ParticipationSystem.SistemaDeParticipacion;
+package es.uniovi.asw.participationSystem.SistemaDeParticipacion;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package es.uniovi.asw.ParticipationSystem.DBManagement;
+package es.uniovi.asw.participationSystem.DBManagement;
 
 import java.util.List;
 
@@ -22,4 +22,5 @@ public interface ManageSuggestionDB {
 	public SuggestionVote voteSuggestion(Suggestion suggestion, User user, VoteStatus vote);
 	public Long inFavourVotes(Suggestion suggestion);
 	public RestringedWords addRestringedWord(RestringedWords word);
+	
 }

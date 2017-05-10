@@ -1,4 +1,4 @@
-package es.uniovi.asw.ParticipationSystem.Mensajeria.Impl;
+package es.uniovi.asw.participationSystem.Mensajeria.ports;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,21 +11,18 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import es.uniovi.asw.ParticipationSystem.Mensajeria.KafkaProducer;
 import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.Suggestion;
 import es.uniovi.asw.model.SuggestionVote;
+import es.uniovi.asw.participationSystem.Mensajeria.KafkaProducer;
 
 import javax.annotation.ManagedBean;
 
-/**
- * Created by herminio on 26/12/16.
- */
 @ManagedBean
 @Service
-public class KafkaProducerImpl implements KafkaProducer{
+public class KafkaProducerP implements KafkaProducer{
 
-    private static final Logger logger = Logger.getLogger(KafkaProducerImpl.class);
+    private static final Logger logger = Logger.getLogger(KafkaProducerP.class);
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;

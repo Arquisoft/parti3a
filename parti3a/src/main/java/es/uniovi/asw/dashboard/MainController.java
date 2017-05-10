@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import es.uniovi.asw.ParticipationSystem.SistemaDeParticipacion.ManageSuggestion;
 import es.uniovi.asw.model.Citizen;
 import es.uniovi.asw.model.Suggestion;
 import es.uniovi.asw.model.User;
+import es.uniovi.asw.participationSystem.SistemaDeParticipacion.ManageSuggestion;
 import es.uniovi.asw.persistence.CitizenRepository;
 import es.uniovi.asw.persistence.CommentRepository;
 import es.uniovi.asw.persistence.SuggestionRepository;
