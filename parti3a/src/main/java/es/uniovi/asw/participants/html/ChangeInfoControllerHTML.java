@@ -89,7 +89,7 @@ public class ChangeInfoControllerHTML {
 	public String handleErrorResponseNotFound(ErrorInterface excep, RedirectAttributes attrs) {
 		attrs.addFlashAttribute("error", excep.getStringError());
 		attrs.addFlashAttribute("errorPresent", true);
-		return "redirect:/datos";
+		return "error";
 	}
 	
 	@ExceptionHandler(ErrorInterface.class)
