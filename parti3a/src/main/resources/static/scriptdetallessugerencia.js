@@ -1,3 +1,14 @@
+function SendAlarm(title, content) {
+  Push.create(title, {
+    body: content,
+    timeout: 4000,
+    onClick: function () {
+      window.focus();
+      this.close();
+    }
+  });
+}
+
 $(document).ready(function() {
 var tabla = $("#tablaComentariosBody");
 var idSug = parseInt($("#idSugerencia").html());
@@ -20,14 +31,7 @@ var stompClient = Stomp.over(socket);
 
       tabla.append(htmlString);
 
-      Push.create("Nuevo comentario", {
-        body: comentario.contents,
-        timeout: 4000,
-        onClick: function () {
-          window.focus();
-          this.close();
-        }
-      });
+      SendAlarm("Nuevo comentario", comentario.contents);
     }
   });
 
@@ -46,25 +50,11 @@ var stompClient = Stomp.over(socket);
         window.myChart.update();
 
         if (sugerencia.positiveVotes > positivosAntes) {
-          Push.create("Voto positivo", {
-            body: sugerencia.contents,
-            timeout: 4000,
-            onClick: function () {
-              window.focus();
-              this.close();
-            }
-          });
+          SendAlarm("Voto positivo", sugerencia.contents);
         }
 
         if (sugerencia.negativeVotes > negativosAntes) {
-          Push.create("Voto negativo", {
-            body: sugerencia.contents,
-            timeout: 4000,
-            onClick: function () {
-              window.focus();
-              this.close();
-            }
-          });
+          SendAlarm("Voto negativo", sugerencia.contents);
         }
     }
   });

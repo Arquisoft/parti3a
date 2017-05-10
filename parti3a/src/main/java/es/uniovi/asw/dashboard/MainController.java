@@ -18,7 +18,6 @@ import es.uniovi.asw.model.Citizen;
 import es.uniovi.asw.model.Suggestion;
 import es.uniovi.asw.model.User;
 import es.uniovi.asw.persistence.CitizenRepository;
-import es.uniovi.asw.persistence.CommentRepository;
 import es.uniovi.asw.persistence.SuggestionRepository;
 import es.uniovi.asw.util.Encrypter;
 
@@ -30,22 +29,24 @@ public class MainController {
     private SuggestionRepository sugerenciaRepository;
     
     @Autowired
-    private CommentRepository comentarioRepository;
-    
-    @Autowired
     private CitizenRepository repository;
     
     @Autowired
     private ManageSuggestion manageSuggestion;
 
+    @Autowired
+    private QueryInfo queryInfo;
+    
     @RequestMapping("/sugerencias")
     public String vistaSugerencias(Model model, HttpSession session) {
     	Citizen citizen = (Citizen) session.getAttribute("citizen");
     	if (citizen == null || citizen.getUser() == null || !citizen.getUser().isAdmin())
     		return "redirect:/";
     	
-    	model.addAttribute("sugerencias", sugerenciaRepository.findAll());
-    	model.addAttribute("comentarios", comentarioRepository.findAll());
+    	DashboardData data = queryInfo.queryInfo();
+    	
+    	model.addAttribute("sugerencias", data.getSugerencias());
+    	model.addAttribute("comentarios", data.getComentarios());
         return "vistaSugerencias";
     }
     
